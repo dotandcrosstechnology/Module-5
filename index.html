@@ -1,0 +1,1509 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Content &amp; Branding Module 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Fraunces:opsz,wght@9..144,600&family=Fredoka:wght@500;600&family=Archivo+Black&display=swap">
+<style>
+:root{
+  color-scheme: light;
+  --bg:#FFFFFF;
+  --ink:#0E1A33;
+  --muted:#5A6478;
+  --line:#E3E7EF;
+  --soft:#F4F6FA;
+  --soft2:#EDF1F8;
+  --accent:#1A56DB;
+  --navy:#1E3A8A;
+  --link:#1A0DAB;
+  --url:#1E6B34;
+  --hl:#FFE066;
+  --good:#0B8A5A; --good-bg:#E6F5EE;
+  --warn:#B86E00; --warn-bg:#FFF4DC;
+  --bad:#C9302C;  --bad-bg:#FDECEA;
+  --l0:#1E3A8A; --l1:#1A56DB; --l2:#0B8A5A; --l3:#B42F6B; --l4:#C2410C;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:clamp(15px, 0.55vw + 11px, 19px);line-height:1.5;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+
+.app{height:100%;display:grid;grid-template-rows:auto 1fr auto}
+
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px clamp(16px,3vw,32px);border-bottom:1px solid var(--line);background:var(--bg)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-family:var(--display);font-size:1rem;color:var(--navy);margin-right:auto;white-space:nowrap}
+.brand .mag{width:26px;height:26px;border-radius:50%;border:3px solid var(--navy);position:relative;flex:none}
+.brand .mag::after{content:"";position:absolute;width:10px;height:3px;background:var(--navy);right:-8px;bottom:-4px;transform:rotate(45deg);border-radius:2px}
+.brand small{font-family:var(--body);font-weight:600;color:var(--muted);font-size:.85rem}
+.jumps{display:flex;gap:6px;flex-wrap:wrap}
+.jumps button{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 12px;font-size:.82rem;font-weight:600;color:var(--muted);cursor:pointer}
+.jumps button[aria-current="true"]{background:var(--jc,var(--navy));border-color:var(--jc,var(--navy));color:#fff}
+.jumps button:hover{border-color:var(--jc,var(--navy))}
+.counter{font-family:var(--mono);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* ---------- stage ---------- */
+.stage{position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;overflow-y:auto;padding-block:clamp(20px,4vh,48px);padding-inline:clamp(16px,5vw,64px);opacity:0;visibility:hidden;transform:translateX(28px);transition:opacity .35s ease, transform .35s ease, visibility 0s linear .35s}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .35s ease, transform .35s ease}
+.slide.back{transform:translateX(-28px)}
+.wrap{max-width:1160px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:clamp(14px,2.2vh,24px)}
+.slide[data-lec="0"],.slide[data-lec="5"]{--lc:var(--l0)}
+.slide[data-lec="1"]{--lc:var(--l1)}
+.slide[data-lec="2"]{--lc:var(--l2)}
+.slide[data-lec="3"]{--lc:var(--l3)}
+.slide[data-lec="4"]{--lc:var(--l4)}
+
+/* ---------- type ---------- */
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:-.015em;line-height:1.08}
+h1{font-size:clamp(2.4rem,6vw,4.8rem);font-weight:800}
+h2{font-size:clamp(1.7rem,3.3vw,2.8rem);font-weight:800}
+h3{font-size:clamp(1.1rem,1.6vw,1.35rem);font-weight:700;letter-spacing:-.005em}
+p{margin:0}
+.lead{font-size:1.15em;color:var(--muted);max-width:62ch}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--lc,var(--navy))}
+.eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--lc,var(--navy))}
+.eyebrow .kind{color:var(--muted);font-weight:600}
+mark{background:linear-gradient(transparent 55%, var(--hl) 55%);color:inherit;padding:0 .1em}
+code,.mono{font-family:var(--mono);font-size:.88em}
+.muted{color:var(--muted)}
+.small{font-size:.86rem}
+
+/* ---------- layout helpers ---------- */
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,28px);align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(16px,2.4vw,32px);align-items:start}
+.panel{background:var(--soft);border-radius:14px;padding:clamp(14px,1.6vw,22px)}
+.box{border:1px solid var(--line);border-radius:14px;padding:clamp(14px,1.6vw,20px);background:var(--bg)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.stack{display:flex;flex-direction:column;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--ink);background:var(--ink);color:#fff;border-radius:10px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:.92rem}
+.btn:hover{background:var(--navy);border-color:var(--navy)}
+.btn.ghost{background:var(--bg);color:var(--ink)}
+.btn.ghost:hover{background:var(--soft)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.warn{background:var(--warn-bg);color:var(--warn)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.tag{display:inline-block;background:var(--soft2);color:var(--navy);border-radius:6px;padding:1px 8px;font-size:.8rem;font-weight:600}
+ul.clean{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ul.ticks li{padding-left:26px;position:relative}
+ul.ticks li::before{content:"";position:absolute;left:4px;top:.45em;width:11px;height:6px;border-left:2.5px solid var(--lc,var(--accent));border-bottom:2.5px solid var(--lc,var(--accent));transform:rotate(-45deg)}
+
+/* ---------- search box motif ---------- */
+.searchbox{display:flex;align-items:center;gap:14px;border:1px solid #DADCE0;border-radius:999px;padding:12px 22px;box-shadow:0 2px 10px rgba(14,26,51,.08);background:var(--bg);max-width:680px;width:100%}
+.searchbox .ico{width:18px;height:18px;border-radius:50%;border:2.5px solid var(--muted);position:relative;flex:none}
+.searchbox .ico::after{content:"";position:absolute;width:7px;height:2.5px;background:var(--muted);right:-6px;bottom:-3px;transform:rotate(45deg)}
+.searchbox .q{font-size:clamp(1.05rem,2vw,1.45rem);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-.15em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- cover ---------- */
+.cover h1 .blue{color:var(--accent)}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;border-top:1px solid var(--line);padding-top:16px}
+.fact b{display:block;font-family:var(--display);font-size:1.7rem;line-height:1}
+.fact span{font-size:.85rem;color:var(--muted)}
+
+/* ---------- roadmap ---------- */
+.lec-card{border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;cursor:pointer;text-align:left;background:var(--bg);transition:transform .15s, box-shadow .15s}
+.lec-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(14,26,51,.08)}
+.lec-card .n{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;color:var(--c)}
+.lec-card .lab{font-size:.8rem;font-weight:700;color:var(--c);text-transform:uppercase;letter-spacing:.06em}
+
+/* ---------- divider ---------- */
+.divider .bign{font-family:var(--display);font-weight:800;font-size:clamp(5rem,14vw,11rem);line-height:.85;color:var(--lc);letter-spacing:-.04em}
+.divider .labline{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ---------- SERP mock ---------- */
+.serp{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;font-family:Arial, "Helvetica Neue", sans-serif;font-size:.86rem}
+.serp .sq{display:flex;align-items:center;gap:10px;border:1px solid #DADCE0;border-radius:999px;padding:6px 14px}
+.zone{border:2px dashed transparent;border-radius:10px;padding:8px 10px;cursor:pointer;position:relative;transition:border-color .15s, background .15s}
+.zone:hover,.zone.on{border-color:var(--lc);background:#F7FAFF}
+.zone .zl{position:absolute;top:-10px;right:8px;background:var(--lc);color:#fff;font-family:var(--body);font-size:.7rem;font-weight:700;border-radius:6px;padding:1px 8px;opacity:0;transition:opacity .15s}
+.zone:hover .zl,.zone.on .zl{opacity:1}
+.r-site{color:#202124;font-size:.8rem}
+.r-url{color:#4D5156;font-size:.76rem}
+.r-title{color:var(--link);font-size:1.08rem;line-height:1.3}
+.r-desc{color:#4D5156;line-height:1.45}
+.spons{font-weight:700;color:#202124;font-size:.78rem}
+.mapbox{height:70px;border-radius:8px;background:
+  linear-gradient(90deg, transparent 48%, #fff 48% 52%, transparent 52%),
+  linear-gradient(0deg, transparent 40%, #fff 40% 45%, transparent 45%),
+  linear-gradient(135deg,#DDEBD8,#E8EEF7);position:relative}
+.mapbox i{position:absolute;width:12px;height:12px;border-radius:50% 50% 50% 0;background:#D93025;transform:rotate(-45deg)}
+.local-row{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #EEE;padding-top:5px;margin-top:5px}
+.stars{color:#E7A600;letter-spacing:1px}
+.paa-q{border-top:1px solid #EEE;padding:6px 0;display:flex;justify-content:space-between}
+.info{min-height:240px}
+.info .who{margin-top:10px}
+
+/* ---------- process ---------- */
+.flow{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;position:relative}
+.step{border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:8px;position:relative;background:var(--bg)}
+.step .sn{font-family:var(--mono);font-size:.78rem;color:var(--lc);font-weight:600}
+.step .big{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--ink)}
+.step .vis{height:74px;border-radius:10px;background:var(--soft);display:flex;align-items:center;justify-content:center;gap:6px;overflow:hidden}
+.bot{width:30px;height:30px;border-radius:8px;background:var(--lc);position:relative;animation:crawl 2.4s ease-in-out infinite}
+.bot::before,.bot::after{content:"";position:absolute;top:10px;width:5px;height:5px;background:#fff;border-radius:50%}
+.bot::before{left:7px}.bot::after{right:7px}
+@keyframes crawl{0%,100%{transform:translateX(-40px)}50%{transform:translateX(40px)}}
+.shelf{display:flex;gap:4px;align-items:flex-end}
+.shelf span{width:10px;background:var(--lc);border-radius:2px;opacity:.75}
+.rank{display:flex;flex-direction:column;gap:4px;width:70%}
+.rank span{height:9px;border-radius:4px;background:var(--line)}
+.rank span:first-child{background:var(--lc);width:100%}
+.rank span:nth-child(2){width:80%}.rank span:nth-child(3){width:60%}
+
+/* ---------- intent sorter ---------- */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border:1.5px dashed var(--line);border-radius:12px}
+.chip{border:1.5px solid var(--line);background:var(--bg);border-radius:999px;padding:6px 14px;cursor:pointer;font-family:var(--mono);font-size:.84rem;user-select:none}
+.chip:hover{border-color:var(--lc)}
+.chip.sel{border-color:var(--lc);background:var(--lc);color:#fff}
+.chip.ok{border-color:var(--good);background:var(--good-bg);color:var(--good)}
+.chip.no{border-color:var(--bad);background:var(--bad-bg);color:var(--bad)}
+.bins{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.bin{border:1.5px solid var(--line);border-radius:14px;padding:12px;min-height:150px;display:flex;flex-direction:column;gap:8px;cursor:pointer;background:var(--bg);transition:border-color .15s, background .15s}
+.bin:hover,.bin.over{border-color:var(--lc);background:#F7FAFF}
+.bin h3{font-size:1rem}
+.bin .hint{font-size:.78rem;color:var(--muted)}
+.bin .drop{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.score{font-weight:700}
+
+/* ---------- metrics / long-tail ---------- */
+.metric b{font-family:var(--display);font-size:1.1rem}
+.tail{display:flex;flex-direction:column;gap:12px}
+.tail-row{display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.tail-row.head{border-top:0;padding:0;font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.meter{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--c,var(--lc));border-radius:4px}
+
+/* ---------- lab ---------- */
+.lab-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+.labtag{display:inline-flex;align-items:center;gap:8px;background:var(--lc);color:#fff;border-radius:8px;padding:3px 12px;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase}
+.timer{display:flex;align-items:center;gap:10px;border:1.5px solid var(--line);border-radius:12px;padding:6px 8px 6px 14px}
+.timer .t{font-family:var(--mono);font-size:1.4rem;font-weight:600;font-variant-numeric:tabular-nums;min-width:5ch}
+.timer button{border:0;background:var(--soft);border-radius:8px;padding:6px 12px;font-weight:700;cursor:pointer;font-size:.85rem}
+.timer button:hover{background:var(--soft2)}
+.timer.running{border-color:var(--lc)}
+.timer.running .t{color:var(--lc)}
+.timer.done{border-color:var(--bad);animation:pulse 1s ease-in-out 4}
+.timer.done .t{color:var(--bad)}
+@keyframes pulse{50%{box-shadow:0 0 0 6px var(--bad-bg)}}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start}
+ol.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:var(--soft2);color:var(--lc);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.deliver{border:1.5px solid var(--lc);border-radius:14px;padding:14px 16px}
+.deliver h3{color:var(--lc);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table.sheet{border-collapse:collapse;width:100%;min-width:640px;font-size:.86rem}
+table.sheet th{background:var(--soft);text-align:left;padding:8px 10px;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--line)}
+table.sheet td{padding:8px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);min-width:90px}
+table.sheet td:last-child{border-right:0}
+table.sheet td[contenteditable]:focus{outline:2px solid var(--lc);outline-offset:-2px;background:#FAFCFF}
+table.sheet tr.ex td{color:var(--muted);font-style:italic}
+
+/* ---------- on-page anatomy ---------- */
+.browser{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.b-tabs{background:var(--soft2);padding:8px 10px 0;display:flex}
+.b-tab{background:var(--bg);border-radius:8px 8px 0 0;padding:6px 14px;font-size:.78rem;max-width:80%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-url{background:var(--bg);border-bottom:1px solid var(--line);padding:6px 12px}
+.b-url span{display:block;background:var(--soft);border-radius:999px;padding:4px 12px;font-family:var(--mono);font-size:.76rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.b-body{padding:16px 18px;display:flex;flex-direction:column;gap:10px}
+.hot{border-radius:6px;outline:2px dashed transparent;outline-offset:3px;cursor:pointer;transition:outline-color .15s, background .15s}
+.hot:hover{outline-color:#C7D2E4}
+.hot.on{outline-color:var(--lc);background:#EFFAF4}
+.fake-img{height:92px;border-radius:10px;background:linear-gradient(135deg,#F9D7C3,#F3B6A0 40%,#8C4A3B);display:flex;align-items:flex-end;padding:8px}
+.fake-img span{font-family:var(--mono);font-size:.7rem;background:rgba(255,255,255,.9);border-radius:4px;padding:1px 6px}
+.legend{display:flex;flex-direction:column;gap:6px}
+.legend button{display:flex;justify-content:space-between;gap:10px;text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:8px 12px;cursor:pointer}
+.legend button.on{border-color:var(--lc);background:#EFFAF4}
+.legend button b{font-size:.92rem}
+.legend button span{font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+.tipbox{min-height:92px}
+
+/* ---------- snippet builder ---------- */
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-size:.8rem;font-weight:700;display:flex;justify-content:space-between;gap:8px}
+.field input,.field textarea{border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;background:var(--bg);width:100%;font-size:.95rem}
+.field textarea{resize:vertical;min-height:74px}
+.field input:focus,.field textarea:focus{border-color:var(--lc);outline:none}
+.cnt{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600}
+.cnt.good{color:var(--good)}.cnt.warn{color:var(--warn)}.cnt.bad{color:var(--bad)}
+.lenbar{height:5px;border-radius:3px;background:var(--line);overflow:hidden}
+.lenbar i{display:block;height:100%;transition:width .15s, background .15s}
+.preview{border:1px solid var(--line);border-radius:14px;padding:16px;font-family:Arial, "Helvetica Neue", sans-serif;display:flex;flex-direction:column;gap:3px}
+.preview .fav{display:flex;align-items:center;gap:10px}
+.preview .fav i{width:26px;height:26px;border-radius:50%;background:var(--soft2);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.72rem;font-weight:700;color:var(--l2)}
+.preview .r-title{font-size:1.2rem}
+.checks li{display:flex;gap:10px;align-items:flex-start;font-size:.9rem}
+.checks li i{flex:none;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:.72rem;font-weight:700;margin-top:2px}
+.checks li.pass i{background:var(--good-bg);color:var(--good)}
+.checks li.fail i{background:var(--bad-bg);color:var(--bad)}
+.scorebig{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1}
+
+/* ---------- code spot ---------- */
+.code{background:#0F1729;color:#E6ECF7;border-radius:14px;padding:12px 0;font-family:var(--mono);font-size:.84rem;overflow-x:auto}
+.cl{display:flex;gap:14px;padding:4px 16px;cursor:pointer;border-left:4px solid transparent;white-space:pre;min-width:max-content}
+.cl:hover{background:#1B2640}
+.cl .ln{color:#6B7A99;width:2ch;text-align:right;flex:none}
+.cl.flag{background:#2B2410;border-left-color:var(--hl)}
+.cl.found{background:#0F3325;border-left-color:#35C98A}
+.cl.missed{background:#3A2A0A;border-left-color:#F2A93B}
+.cl.false{background:#3B1616;border-left-color:#F2645A}
+.cl .tg{color:#7FB2FF}.cl .at{color:#F7C97E}.cl .st{color:#9BE39B}
+.bugnote{white-space:normal;font-family:var(--body);font-size:.84rem;color:#CFE9DC;padding:0 16px 8px 50px;display:none}
+.bugnote.show{display:block}
+.bugnote.m{color:#F7D9A3}
+
+/* ---------- backlinks ---------- */
+.votes{display:flex;flex-direction:column;gap:10px}
+.vote{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.vote .meter i{background:var(--c)}
+.gamecard{border:1.5px solid var(--line);border-radius:18px;padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:16px;min-height:280px;background:var(--bg)}
+.gamecard .scene{font-family:var(--display);font-size:clamp(1.2rem,2.2vw,1.7rem);font-weight:700;line-height:1.25}
+.gamecard .fb{border-radius:12px;padding:12px 14px;font-size:.95rem}
+.gamecard .fb.good{background:var(--good-bg)}
+.gamecard .fb.bad{background:var(--bad-bg)}
+.btn.good{background:var(--good);border-color:var(--good)}
+.btn.bad{background:var(--bad);border-color:var(--bad)}
+.dots{display:flex;gap:6px}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.dots i.g{background:var(--good)}.dots i.b{background:var(--bad)}.dots i.c{outline:2px solid var(--lc);outline-offset:1px}
+
+/* ---------- NAP ---------- */
+.nap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nap .box{font-size:.9rem;display:flex;flex-direction:column;gap:4px}
+.nap .src{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.mm{border-radius:4px;transition:background .2s, box-shadow .2s}
+.reveal .mm{background:var(--bad-bg);box-shadow:0 0 0 2px var(--bad-bg);color:var(--bad);font-weight:700}
+
+/* ---------- technical ---------- */
+.tech{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.tech .how{font-size:.82rem;color:var(--muted)}
+.tech .how code{color:var(--ink)}
+.robots textarea{width:100%;min-height:170px;font-family:var(--mono);font-size:.84rem;border:1.5px solid var(--line);border-radius:12px;padding:12px;background:#FBFCFE;resize:vertical}
+.robots textarea:focus{outline:none;border-color:var(--lc)}
+.pathin{display:flex;gap:8px}
+.pathin input{flex:1;min-width:0;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;font-family:var(--mono);font-size:.9rem}
+.pathin input:focus{outline:none;border-color:var(--lc)}
+.verdict{border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;min-height:110px}
+.verdict.allow{background:var(--good-bg)}
+.verdict.block{background:var(--bad-bg)}
+.verdict .v{font-family:var(--display);font-weight:800;font-size:1.8rem;line-height:1}
+.verdict.allow .v{color:var(--good)}.verdict.block .v{color:var(--bad)}
+.quick{display:flex;flex-wrap:wrap;gap:6px}
+.quick button{font-family:var(--mono);font-size:.8rem;border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:3px 10px;cursor:pointer}
+.quick button:hover{border-color:var(--lc)}
+
+/* ---------- CWV ---------- */
+.cwv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.vital{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.vital .val{font-family:var(--display);font-weight:800;font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.zones{position:relative;height:12px;border-radius:6px;display:flex;overflow:visible}
+.zones span{height:100%}
+.zones span:nth-child(1){background:#34A36F;border-radius:6px 0 0 6px}
+.zones span:nth-child(2){background:#F2B33D}
+.zones span:nth-child(3){background:#E5534B;border-radius:0 6px 6px 0}
+.zones .mk{position:absolute;top:-5px;width:4px;height:22px;background:var(--ink);border-radius:2px;transform:translateX(-2px);transition:left .1s}
+.vital input[type=range]{width:100%;accent-color:var(--lc)}
+.vital .fix{font-size:.84rem;color:var(--muted)}
+.ticks3{display:flex;justify-content:space-between;font-family:var(--mono);font-size:.7rem;color:var(--muted)}
+
+/* ---------- checklist ---------- */
+.checklist label{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:10px;cursor:pointer}
+.checklist label:hover{background:var(--soft)}
+.checklist input{width:18px;height:18px;margin-top:3px;accent-color:var(--lc);flex:none}
+.checklist input:checked + span{color:var(--muted);text-decoration:line-through}
+.progress-mini{height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.progress-mini i{display:block;height:100%;background:var(--lc);width:0;transition:width .2s}
+
+.copyblock{background:var(--soft);border-radius:12px;padding:12px 14px;font-size:.88rem;white-space:pre-wrap;font-family:var(--body)}
+
+/* ---------- quiz ---------- */
+.quiz{border:1.5px solid var(--line);border-radius:18px;padding:clamp(18px,2.4vw,30px);display:flex;flex-direction:column;gap:14px}
+.quiz .qn{font-family:var(--mono);font-size:.8rem;color:var(--muted)}
+.quiz .qt{font-family:var(--display);font-size:clamp(1.25rem,2.3vw,1.8rem);font-weight:700;line-height:1.2}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.opt{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:12px 14px;text-align:left;cursor:pointer;font-size:.98rem}
+.opt:hover:not([disabled]){border-color:var(--lc)}
+.opt.right{border-color:var(--good);background:var(--good-bg)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt[disabled]{cursor:default}
+.expl{font-size:.95rem;color:var(--muted)}
+
+/* ---------- footer nav ---------- */
+.footer{display:flex;align-items:center;gap:14px;padding:10px clamp(16px,3vw,32px);padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);background:var(--bg)}
+.navbtn{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.navbtn:hover{border-color:var(--ink)}
+.navbtn svg{width:18px;height:18px}
+.navbtn.next{background:var(--ink);border-color:var(--ink)}
+.navbtn.next svg{stroke:#fff}
+.navbtn[disabled]{opacity:.35;cursor:default}
+.track{flex:1;display:flex;gap:3px;align-items:center;min-width:0}
+.track button{flex:1;height:8px;border:0;padding:0;border-radius:3px;background:var(--line);cursor:pointer;min-width:3px;transition:height .15s}
+.track button:hover{height:12px}
+.track button.seen{background:var(--c)}
+.track button.cur{height:14px;background:var(--c)}
+.navtitle{font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:28ch}
+.keyhint{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.keyhint kbd{font-family:var(--mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;font-size:.72rem}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px){
+  .grid4,.bins{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .split,.grid2{grid-template-columns:minmax(0,1fr)}
+  .cwv,.grid3,.nap,.flow{grid-template-columns:minmax(0,1fr)}
+  .keyhint,.navtitle{display:none}
+}
+@media (max-width: 560px){
+  .grid4,.bins,.opts{grid-template-columns:minmax(0,1fr)}
+  .brand small{display:none}
+  .tail-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .tail-row .hide-s{display:none}
+  .vote{grid-template-columns:minmax(0,1fr) auto}
+  .vote .meter{grid-column:1/-1;order:3}
+  .wrap{justify-content:flex-start}
+}
+@media (prefers-reduced-motion: reduce){
+  .slide,.slide.active{transition:none;transform:none}
+  .bot,.caret,.timer.done{animation:none}
+}
+</style>
+<style>
+:root{
+  --l1:#8B2FC9; --l2:#0E7490; --l3:#B45309; --l4:#BE185D;
+  --tint:#F8F5FC;
+}
+.zone:hover,.zone.on{background:var(--tint)}
+.brand{color:var(--ink)}
+.brand .mag{border-color:var(--l1);border-radius:9px 9px 9px 2px}
+.brand .mag::after{display:none}
+
+/* ---------- cover composer ---------- */
+.composer{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:18px;padding:14px 18px;max-width:640px;width:100%;box-shadow:0 2px 12px rgba(14,26,51,.07);background:var(--bg)}
+.composer .av{width:40px;height:40px;border-radius:50%;background:var(--l1);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;flex:none}
+.composer .who{font-weight:700;font-size:.9rem}
+.composer .who span{color:var(--muted);font-weight:400}
+.composer .q{font-size:clamp(1rem,1.8vw,1.3rem);min-height:1.5em}
+.cover h1 .hl{color:var(--l1)}
+
+/* ---------- iceberg ---------- */
+.berg{position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#FFFFFF 0 34%, #DCEBFA 34%, #B9D6F2 100%);padding:18px;min-height:380px;display:grid;grid-template-rows:34% 1fr}
+.berg::before{content:"";position:absolute;left:0;right:0;top:34%;height:2px;background:#5B8FD0}
+.berg .wl{position:absolute;right:12px;top:calc(34% + 6px);font-size:.72rem;font-weight:700;color:#2D5F9E;letter-spacing:.06em;text-transform:uppercase}
+.berg .tipice{position:absolute;left:50%;top:6%;width:38%;height:28%;transform:translateX(-50%);background:#F1F7FD;border:2px solid #9CC1E8;border-bottom:0;clip-path:polygon(40% 0,62% 8%,100% 100%,0 100%)}
+.berg .deep{position:absolute;left:50%;top:34%;width:86%;height:62%;transform:translateX(-50%);background:rgba(255,255,255,.55);clip-path:polygon(0 0,100% 0,90% 55%,62% 100%,30% 92%,8% 60%)}
+.berg .layer{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:center}
+.berg .layer.top{align-content:flex-end;padding-bottom:10px}
+.icechip{border:1.5px solid #9CC1E8;background:#fff;border-radius:999px;padding:5px 12px;font-weight:600;font-size:.86rem;cursor:pointer;color:var(--ink)}
+.icechip:hover,.icechip.on{border-color:var(--lc);background:var(--lc);color:#fff}
+
+/* ---------- positioning madlib ---------- */
+.madlib{font-family:var(--display);font-size:clamp(1.15rem,2.2vw,1.65rem);font-weight:700;line-height:1.55}
+.madlib .slot{color:var(--lc);border-bottom:2.5px dashed var(--lc);padding:0 2px}
+.mini-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+
+/* ---------- personality sliders ---------- */
+.sl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);gap:10px;align-items:center;font-size:.88rem;font-weight:600}
+.sl span:last-child{text-align:right}
+.sl input{width:100%;accent-color:var(--lc)}
+.igpost{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg)}
+.igpost .ih{display:flex;align-items:center;gap:10px;padding:10px 12px;font-weight:700;font-size:.88rem}
+.igpost .ih i{width:30px;height:30px;border-radius:50%;background:var(--grad,linear-gradient(135deg,#C55B8C,#8B2FC9));flex:none}
+.igpost .img{aspect-ratio:2/1;max-width:100%;background:radial-gradient(circle at 50% 60%,#5A2E1E 0 26%,#7A4430 27% 31%,transparent 32%),linear-gradient(135deg,#F7E3D3,#EBC6A9)}
+.igpost .cap{padding:10px 12px;font-size:.92rem;line-height:1.45}
+.igpost .cap b{margin-right:4px}
+.voicechips{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ---------- brand kit builder ---------- */
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{width:36px;height:36px;border-radius:10px;border:2px solid var(--bg);box-shadow:0 0 0 1.5px var(--line);cursor:pointer}
+.sw.on{box-shadow:0 0 0 3px var(--ink)}
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{border:1.5px solid var(--line);background:var(--bg);border-radius:10px;padding:6px 12px;cursor:pointer;font-weight:600;font-size:.88rem}
+.seg button.on{border-color:var(--lc);background:var(--lc);color:#fff}
+.kit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.lockup{border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;min-height:200px}
+.lockup .mono-mark{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.lockup .bn{font-size:1.5rem;line-height:1.1;word-break:break-word}
+.lockup .tl{font-size:.82rem;color:var(--muted)}
+.postsq{border-radius:14px;aspect-ratio:1/1;max-width:100%;padding:18px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+.postsq .big{font-size:clamp(1.2rem,2.2vw,1.7rem);line-height:1.1;word-break:break-word}
+.postsq .sm{font-size:.78rem;opacity:.85}
+.hexes{display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:.76rem}
+.hexes span{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:8px;padding:3px 8px}
+.hexes i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+/* ---------- flip cards ---------- */
+.flips{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.flip{border:1.5px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:190px;background:var(--bg);text-align:left;cursor:pointer}
+.flip .k{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.flip .f{font-weight:700;font-size:1.02rem}
+.flip .b{display:none;font-size:.95rem}
+.flip .so{margin-top:auto;font-size:.82rem;font-weight:700;color:var(--lc)}
+.flip.open{border-color:var(--lc);background:#F2FAFB}
+.flip.open .b{display:block}
+.flip.open .so{display:none}
+
+/* ---------- formula tabs ---------- */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1.5px solid var(--line);background:var(--bg);border-radius:10px;padding:6px 14px;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--lc);border-color:var(--lc);color:#fff}
+.formula{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:16px;align-items:start}
+.fparts{display:flex;flex-direction:column;gap:8px}
+.fpart{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:start;border-radius:12px;padding:10px 12px;background:var(--soft)}
+.fpart .lt{width:36px;height:36px;border-radius:10px;color:#fff;font-family:var(--display);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.fpart b{display:block}
+.fpart span{font-size:.86rem;color:var(--muted)}
+.fexample{border:1px solid var(--line);border-radius:14px;padding:16px;font-size:1rem;line-height:1.6}
+.fexample .seg-t{border-radius:4px;padding:1px 3px}
+
+/* ---------- headline analyzer ---------- */
+.hlbig{font-family:var(--display);font-size:clamp(1.3rem,2.6vw,2rem);font-weight:800;line-height:1.2;min-height:2.4em;word-break:break-word}
+.gauge{display:flex;align-items:baseline;gap:6px}
+.gauge .n{font-family:var(--display);font-weight:800;font-size:2.6rem;line-height:1;font-variant-numeric:tabular-nums}
+.examples{display:flex;flex-wrap:wrap;gap:6px}
+.examples button{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:4px 10px;cursor:pointer;font-size:.82rem;text-align:left}
+.examples button:hover{border-color:var(--lc)}
+
+/* ---------- cluster ---------- */
+.cluster{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,auto);gap:clamp(10px,2vw,22px)}
+.cluster svg{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.cluster svg line{stroke:var(--l3);stroke-width:2;stroke-dasharray:5 5;opacity:.55;vector-effect:non-scaling-stroke}
+.cnode{position:relative;z-index:1;border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:10px 12px;font-size:.86rem;cursor:pointer;text-align:left;min-height:74px;display:flex;flex-direction:column;gap:4px}
+.cnode .ty{font-size:.68rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.cnode.hub{background:var(--l3);border-color:var(--l3);color:#fff}
+.cnode.hub .ty{color:#FDE7C8}
+.cnode:hover,.cnode.on{border-color:var(--l3);box-shadow:0 0 0 3px #FBEAD3}
+
+/* ---------- outline builder ---------- */
+.outline{border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;font-size:.92rem}
+.outline .o-h1{font-family:var(--display);font-weight:800;font-size:1.25rem;line-height:1.2}
+.outline .o-row{display:grid;grid-template-columns:44px 1fr;gap:10px;align-items:baseline}
+.outline .o-tag{font-family:var(--mono);font-size:.72rem;font-weight:600;color:var(--lc);background:#FBF1E3;border-radius:6px;padding:1px 6px;text-align:center}
+.outline .o-note{color:var(--muted);font-size:.84rem}
+
+/* ---------- calendar ---------- */
+.cal{display:grid;grid-template-columns:70px repeat(3,minmax(0,1fr));gap:8px}
+.cal .ch{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:2px 4px}
+.cal .wk{font-family:var(--mono);font-size:.78rem;color:var(--muted);display:flex;align-items:center}
+.cell{border-radius:10px;padding:8px 10px;cursor:pointer;border:1.5px solid transparent;text-align:left;display:flex;flex-direction:column;gap:2px;min-height:62px;font-size:.82rem;line-height:1.3}
+.cell b{font-size:.7rem;letter-spacing:.06em;text-transform:uppercase}
+.cell:hover{border-color:var(--ink)}
+.p-edu{background:#E3F2F7;color:#0B5466}
+.p-bts{background:#F1E8FA;color:#5E1F8A}
+.p-story{background:#E6F5EE;color:#08613F}
+.p-promo{background:#FDE8EF;color:#9A1347}
+.mixbar{display:flex;height:14px;border-radius:7px;overflow:hidden}
+.mixbar span{transition:width .2s}
+.mixleg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.82rem}
+.mixleg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px}
+
+/* ---------- email funnel ---------- */
+.funnel{display:flex;flex-direction:column;gap:8px;align-items:center}
+.fstep{border:0;border-radius:12px;padding:12px 16px;color:#fff;font-weight:700;cursor:pointer;text-align:center;transition:transform .15s, box-shadow .15s}
+.fstep small{display:block;font-weight:400;opacity:.9;font-size:.8rem}
+.fstep:hover,.fstep.on{transform:scale(1.02);box-shadow:0 0 0 3px #FBD5E4}
+.owned{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.owned .box h3{font-size:.95rem}
+
+/* ---------- inbox ---------- */
+.phone{border:10px solid #1B2233;border-radius:30px;max-width:340px;width:100%;margin:0 auto;background:var(--bg);overflow:hidden}
+.phone .bar{padding:8px 14px;font-weight:700;font-size:.9rem;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+.mail{display:grid;grid-template-columns:34px 1fr;gap:10px;padding:10px 12px;border-bottom:1px solid var(--line);font-family:Arial, "Helvetica Neue", sans-serif}
+.mail .av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.8rem}
+.mail .fr{display:flex;justify-content:space-between;font-size:.82rem;font-weight:700}
+.mail .fr span{font-weight:400;color:var(--muted);font-size:.74rem}
+.mail .sj,.mail .ph{font-size:.8rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail .sj{font-weight:700;color:var(--ink)}
+.mail .ph{color:var(--muted)}
+.mail.you{background:#FFF5F9}
+.mail.dim{opacity:.6}
+
+/* ---------- metrics ---------- */
+.mfields{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.mfields input{border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;width:100%;font-family:var(--mono);font-size:.95rem}
+.mfields input:focus{outline:none;border-color:var(--lc)}
+.rates{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rate{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.rate .rv{font-family:var(--display);font-weight:800;font-size:2rem;line-height:1;font-variant-numeric:tabular-nums}
+.rate .rf{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+
+@media (max-width: 900px){
+  .flips,.rates{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .formula,.owned{grid-template-columns:minmax(0,1fr)}
+  .mfields{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media (max-width: 560px){
+  .flips,.rates,.kit,.mini-fields{grid-template-columns:minmax(0,1fr)}
+  .mfields{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cal{grid-template-columns:44px repeat(3,minmax(0,1fr))}
+  .cell{font-size:.72rem;padding:6px}
+  .cnode{font-size:.74rem;padding:8px}
+  .sl{grid-template-columns:1fr 1fr;}
+  .sl input{grid-column:1/-1;order:3}
+}
+</style>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><span class="mag" aria-hidden="true"></span>Module 5 · Content &amp; Branding <small>Digital Marketing Course</small></div>
+    <nav class="jumps" id="jumps" aria-label="Jump to lecture"></nav>
+    <div class="counter" id="counter">1 / 25</div>
+  </header>
+
+  <main class="stage" id="stage">
+
+<!-- ============ COVER ============ -->
+<section class="slide cover" data-lec="0" data-title="Make people remember you">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Module 5 <span class="kind">· 4 lectures · 1.5 hours each</span></div>
+  <div class="composer" aria-hidden="true"><span class="av">SO</span><div><div class="who">Sweet Oven <span>· drafting a post</span></div><div class="q"><span id="typeq"></span><span class="caret"></span></div></div></div>
+  <h1>Make people <span class="hl">remember</span> you.<br>Content Marketing &amp; Branding</h1>
+  <p class="lead">You will build a brand identity, write copy that sells, plan a blog that Google can find and send your first email campaign. Every lecture ends with a hands-on lab in Canva, ChatGPT or Mailchimp.</p>
+  <div class="facts">
+   <div class="fact"><b>4</b><span>lectures</span></div>
+   <div class="fact"><b>6 h</b><span>class time</span></div>
+   <div class="fact"><b>4</b><span>hands-on labs</span></div>
+   <div class="fact"><b>10</b><span>live activities</span></div>
+   <div class="fact"><b>1</b><span>Brand &amp; Content Kit</span></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ ROADMAP ============ -->
+<section class="slide" data-lec="0" data-title="Module roadmap">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Module roadmap</div>
+  <h2>From a name and a logo to a brand people trust</h2>
+  <p class="lead">Keep the same business you used for your SEO report in Module 4, or keep working with <b>Sweet Oven</b>, our sample home bakery in Lahore. Your keyword list from Module 4 becomes your blog plan in Lecture 3.</p>
+  <div class="grid4">
+   <button class="lec-card" style="--c:var(--l1)" data-goto="L1"><span class="lab">Lecture 1</span><span class="n">01</span><h3>Brand Building</h3><span class="small muted">Lab: brand kit in Canva</span></button>
+   <button class="lec-card" style="--c:var(--l2)" data-goto="L2"><span class="lab">Lecture 2</span><span class="n">02</span><h3>Content Writing Basics</h3><span class="small muted">Lab: 3 pieces of copy, 3 formulas</span></button>
+   <button class="lec-card" style="--c:var(--l3)" data-goto="L3"><span class="lab">Lecture 3</span><span class="n">03</span><h3>Blogging Strategy</h3><span class="small muted">Lab: blog outline + 4-week calendar</span></button>
+   <button class="lec-card" style="--c:var(--l4)" data-goto="L4"><span class="lab">Lecture 4</span><span class="n">04</span><h3>Email Marketing Introduction</h3><span class="small muted">Lab: first campaign in Mailchimp</span></button>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L1 DIVIDER ============ -->
+<section class="slide divider" data-lec="1" data-title="Lecture 1: Brand Building" id="L1">
+ <div class="wrap">
+  <div class="bign">01</div>
+  <div class="eyebrow"><span class="dot"></span>Lecture 1 of 4</div>
+  <h2>Brand Building</h2>
+  <div class="grid2">
+   <div class="panel"><h3>By the end you can</h3><ul class="clean ticks" style="margin-top:10px">
+    <li>Explain the difference between a logo and a brand</li>
+    <li>Write a one-sentence positioning statement</li>
+    <li>Define a brand voice and use it consistently</li>
+    <li>Choose brand colours and fonts with a reason</li></ul></div>
+   <div class="panel"><h3>Today's lab</h3><p style="margin-top:10px">A one-page brand kit for your business: logo, colours, fonts, voice and 3 post templates.</p><p class="small muted" style="margin-top:8px">Tools: Canva (free), ChatGPT, coolors.co</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L1: Iceberg ============ -->
+<section class="slide" data-lec="1" data-title="A logo is not a brand">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 1 <span class="kind">· Concept · click to explore</span></div>
+  <h2>A logo is the tip. The brand is the whole iceberg.</h2>
+  <div class="split">
+   <div class="berg">
+    <span class="tipice" aria-hidden="true"></span><span class="deep" aria-hidden="true"></span><span class="wl">What customers don't see</span>
+    <div class="layer top" id="bergTop">
+     <button class="icechip" data-k="logo">Logo</button><button class="icechip" data-k="name">Name</button><button class="icechip" data-k="colors">Colours &amp; fonts</button><button class="icechip" data-k="tag">Tagline</button>
+    </div>
+    <div class="layer" id="bergDeep">
+     <button class="icechip" data-k="purpose">Purpose</button><button class="icechip" data-k="values">Values</button><button class="icechip" data-k="promise">Promise</button><button class="icechip" data-k="audience">Audience</button><button class="icechip" data-k="voice">Voice &amp; personality</button><button class="icechip" data-k="exp">Customer experience</button>
+    </div>
+   </div>
+   <div class="stack">
+    <div class="panel info" id="bergInfo" style="min-height:200px"><h3>Click any part of the iceberg</h3><p style="margin-top:8px" class="muted">Above the water is what people see. Below it is what makes them trust you and come back.</p></div>
+    <div class="box"><h3 style="font-size:1rem">Quick discussion (3 min)</h3><p class="small" style="margin-top:6px">Name a local brand you love, such as a chai dhaba, a clothing store or a phone shop. Why do you go back? Count how many of your reasons are above the waterline.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L1: Positioning ============ -->
+<section class="slide" data-lec="1" data-title="Positioning statement">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 1 <span class="kind">· Hands-on · 6 min</span></div>
+  <h2>Say who you are for in one sentence</h2>
+  <p class="lead" style="font-size:1em">A positioning statement is an internal sentence. Customers never see it, but every post, colour and email should agree with it. Fill the blanks for your business.</p>
+  <div class="panel madlib" id="madlib"></div>
+  <div class="mini-fields">
+   <div class="field"><label for="pAud">Target customer</label><input id="pAud" value="busy working mothers in Lahore"></div>
+   <div class="field"><label for="pNeed">Their need or problem</label><input id="pNeed" value="want a special birthday cake without the stress of baking"></div>
+   <div class="field"><label for="pBrand">Brand name</label><input id="pBrand" value="Sweet Oven"></div>
+   <div class="field"><label for="pCat">Category</label><input id="pCat" value="home bakery"></div>
+   <div class="field"><label for="pBen">Main benefit</label><input id="pBen" value="delivers fresh, custom cakes the same day"></div>
+   <div class="field"><label for="pProof">Reason to believe</label><input id="pProof" value="every cake is baked to order in small batches by a pastry-trained chef"></div>
+  </div>
+  <div class="row"><button class="btn ghost" data-copy="madlib">Copy statement</button><span class="small muted">Test it: if a competitor could say the exact same sentence, make the benefit or proof more specific.</span></div>
+ </div>
+</section>
+
+<!-- ============ L1: Voice sliders ============ -->
+<section class="slide" data-lec="1" data-title="Brand voice sliders">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 1 <span class="kind">· Interactive</span></div>
+  <h2>Same cake, four different voices</h2>
+  <p class="lead" style="font-size:1em">Move the sliders and watch the caption change. Decide where your brand sits, then write it down. Every writer on your team uses the same settings.</p>
+  <div class="split">
+   <div class="stack" style="gap:16px">
+    <div class="sl"><span>Formal</span><input type="range" id="vFormal" min="0" max="100" value="70" aria-label="Formal to casual"><span>Casual</span></div>
+    <div class="sl"><span>Serious</span><input type="range" id="vPlay" min="0" max="100" value="60" aria-label="Serious to playful"><span>Playful</span></div>
+    <div class="sl"><span>Traditional</span><input type="range" id="vMod" min="0" max="100" value="30" aria-label="Traditional to modern"><span>Modern</span></div>
+    <div class="sl"><span>Exclusive</span><input type="range" id="vFriend" min="0" max="100" value="80" aria-label="Exclusive to friendly"><span>Friendly</span></div>
+    <div class="box"><b class="small">Your voice in three words</b><div class="voicechips" id="voiceWords" style="margin-top:8px"></div></div>
+    <div class="row"><button class="btn ghost" data-preset="luxury">Luxury patisserie</button><button class="btn ghost" data-preset="fun">Fun kids' bakery</button><button class="btn ghost" data-preset="family">Family recipe shop</button></div>
+   </div>
+   <div class="igpost">
+    <div class="ih"><i></i>sweetoven.pk</div>
+    <div class="img" role="img" aria-label="Chocolate fudge cake"></div>
+    <div class="cap"><b>sweetoven.pk</b><span id="caption"></span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L1: Brand kit builder ============ -->
+<section class="slide" data-lec="1" data-title="Brand kit builder">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 1 <span class="kind">· Hands-on · 8 min</span></div>
+  <h2>Colours and fonts send a message before anyone reads</h2>
+  <div class="split">
+   <div class="stack" style="gap:14px">
+    <div class="field"><label for="kName">Brand name</label><input id="kName" value="Sweet Oven"></div>
+    <div class="field"><label for="kTag">Tagline</label><input id="kTag" value="Baked today, delivered today"></div>
+    <div class="field"><label>Primary colour</label><div class="swatches" id="swatches"></div><p class="small muted" id="swMeaning"></p></div>
+    <div class="field"><label>Font style</label><div class="seg" id="fontSeg"><button data-f="elegant">Elegant serif</button><button data-f="friendly">Friendly rounded</button><button data-f="bold">Bold modern</button></div></div>
+   </div>
+   <div class="stack">
+    <div class="kit">
+     <div class="lockup" id="lockup"><div class="mono-mark" id="mark"></div><div class="bn" id="bName"></div><div class="tl" id="bTag"></div></div>
+     <div class="postsq" id="postsq"><span class="sm" id="pHandle"></span><span class="big">New this week: Chocolate Fudge Cake</span><span class="sm">Order by 2 pm for same-day delivery</span></div>
+    </div>
+    <div class="hexes" id="hexes"></div>
+    <p class="small muted">Rule: one primary colour, one accent, one neutral. Two fonts at most: one for headings, one for body text.</p>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L1: LAB ============ -->
+<section class="slide" data-lec="1" data-title="Lab 1: Brand kit in Canva">
+ <div class="wrap">
+  <div class="lab-head">
+   <div class="stack"><span class="labtag">Lab 1 · 30 min</span><h2>Build your brand kit in Canva</h2></div>
+   <div class="timer" data-min="30"><span class="t">30:00</span><button data-act="toggle">Start</button><button data-act="reset">Reset</button></div>
+  </div>
+  <div class="split">
+   <ol class="steps">
+    <li><span>Write your <b>positioning statement</b> and choose <b>3 voice words</b> from the sliders activity.</span></li>
+    <li><span>Pick a palette on <b>coolors.co</b>: 1 primary, 1 accent, 1 neutral. Copy the hex codes.</span></li>
+    <li><span>In <b>Canva</b>, search “logo”, choose a simple template and change it to your colours and fonts. Keep it readable at small sizes.</span></li>
+    <li><span>Create a page called <b>Brand Kit</b> with logo, hex codes, heading font, body font and voice words. Canva Pro users can save these in Brand Kit; free users keep this page.</span></li>
+    <li><span>Design <b>3 reusable post templates</b>: a product post, a quote or tip post and a customer review post.</span></li>
+   </ol>
+   <div class="stack">
+    <div class="deliver"><h3>You hand in</h3><ul class="clean ticks small"><li>One-page brand kit (PDF or PNG)</li><li>3 post templates in your brand style</li><li>Positioning statement</li></ul></div>
+    <div class="panel small"><b>ChatGPT prompt to try:</b><p style="margin-top:6px" class="mono">Suggest 10 taglines under 6 words for [business], a [category] for [audience]. Our voice is [3 words].</p><p style="margin-top:6px" class="muted">Pick one, then make it more specific to your business.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L2 DIVIDER ============ -->
+<section class="slide divider" data-lec="2" data-title="Lecture 2: Content Writing Basics" id="L2">
+ <div class="wrap">
+  <div class="bign">02</div>
+  <div class="eyebrow"><span class="dot"></span>Lecture 2 of 4</div>
+  <h2>Content Writing Basics</h2>
+  <div class="grid2">
+   <div class="panel"><h3>By the end you can</h3><ul class="clean ticks" style="margin-top:10px">
+    <li>Turn product features into customer benefits</li>
+    <li>Use AIDA, PAS and BAB copy formulas</li>
+    <li>Write headlines that get clicks</li>
+    <li>Edit AI drafts so they sound like your brand</li></ul></div>
+   <div class="panel"><h3>Today's lab</h3><p style="margin-top:10px">Write 3 pieces of copy for your business: an Instagram caption, a Facebook post and a product description.</p><p class="small muted" style="margin-top:8px">Tools: ChatGPT, Hemingway Editor (free web version), Canva</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L2: Features vs benefits ============ -->
+<section class="slide" data-lec="2" data-title="Features tell, benefits sell">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 2 <span class="kind">· Activity · ask “So what?”</span></div>
+  <h2>Features tell. Benefits sell.</h2>
+  <p class="lead" style="font-size:1em">A feature is what the product has. A benefit is what the customer gets. Read the feature, let the class shout “So what?”, then flip the card.</p>
+  <div class="flips" id="flips">
+   <button class="flip"><span class="k">Feature</span><span class="f">Cakes baked with Belgian chocolate</span><span class="b">A rich, moist cake your guests will ask about for weeks.</span><span class="so">So what? Tap to flip</span></button>
+   <button class="flip"><span class="k">Feature</span><span class="f">Same-day delivery across Lahore</span><span class="b">Forgot the birthday? Order by 2 pm and still be the hero tonight.</span><span class="so">So what? Tap to flip</span></button>
+   <button class="flip"><span class="k">Feature</span><span class="f">Phone with 5,000 mAh battery</span><span class="b">Go from Fajr to midnight without hunting for a charger.</span><span class="so">So what? Tap to flip</span></button>
+   <button class="flip"><span class="k">Feature</span><span class="f">Online course with lifetime access</span><span class="b">Learn at your own pace and rewatch any lesson whenever a client asks something new.</span><span class="so">So what? Tap to flip</span></button>
+  </div>
+  <div class="panel row" style="justify-content:space-between"><p><b>Your turn (pairs, 4 min):</b> write 3 features of your own business. Your partner asks “So what?” until you reach a real benefit.</p></div>
+ </div>
+</section>
+
+<!-- ============ L2: Formulas ============ -->
+<section class="slide" data-lec="2" data-title="Three copywriting formulas">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 2 <span class="kind">· Concept</span></div>
+  <h2>Three formulas that beat a blank page</h2>
+  <div class="tabs" id="ftabs"><button data-f="aida" class="on">AIDA</button><button data-f="pas">PAS</button><button data-f="bab">BAB</button></div>
+  <div class="formula">
+   <div class="fparts" id="fparts"></div>
+   <div class="stack"><div class="fexample" id="fexample"></div><p class="small muted" id="fuse"></p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L2: Headline analyzer ============ -->
+<section class="slide" data-lec="2" data-title="Headline analyzer">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 2 <span class="kind">· Hands-on · 8 min</span></div>
+  <h2>Write a headline that earns the click</h2>
+  <p class="lead" style="font-size:1em">Most people read the headline and nothing else. Type a blog or post headline and improve it until you score 80 or more.</p>
+  <div class="split">
+   <div class="stack">
+    <div class="field"><label for="hlIn">Your headline <span class="cnt" id="hlCnt">0</span></label><input id="hlIn" value="Cakes"></div>
+    <div class="field"><label for="hlKw">Keyword from your Module 4 list</label><input id="hlKw" value="birthday cake"></div>
+    <div><p class="small" style="font-weight:700;margin-bottom:6px">Try these:</p><div class="examples" id="hlEx">
+     <button>Cakes</button><button>Our Cakes Are The Best In Town!!!</button><button>How to Choose the Right Birthday Cake Size for Your Party</button><button>7 Birthday Cake Flavours Kids Love (and Parents Secretly Want)</button></div></div>
+   </div>
+   <div class="stack">
+    <div class="box"><div class="hlbig" id="hlShow"></div></div>
+    <div class="box">
+     <div class="row" style="justify-content:space-between;margin-bottom:10px"><h3 style="font-size:1rem">Headline score</h3><div class="gauge"><span class="n" id="hlScore">0</span><span class="muted">/ 100</span></div></div>
+     <ul class="clean checks" id="hlChecks"></ul>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L2: LAB ============ -->
+<section class="slide" data-lec="2" data-title="Lab 2: Write 3 pieces of copy">
+ <div class="wrap">
+  <div class="lab-head">
+   <div class="stack"><span class="labtag">Lab 2 · 30 min</span><h2>Write 3 pieces of copy, 3 formulas</h2></div>
+   <div class="timer" data-min="30"><span class="t">30:00</span><button data-act="toggle">Start</button><button data-act="reset">Reset</button></div>
+  </div>
+  <div class="split">
+   <div class="stack">
+    <ol class="steps">
+     <li><span><b>Instagram caption</b> using AIDA for your best product. Under 125 characters before the “more” cut-off.</span></li>
+     <li><span><b>Facebook post</b> using PAS for a problem your customer has.</span></li>
+     <li><span><b>Product description</b> (60–100 words) using BAB, with 3 benefits, not just features.</span></li>
+     <li><span>Ask ChatGPT for a first draft, then edit it with the checklist. Paste your final version into Hemingway Editor and aim for Grade 8 or lower.</span></li>
+    </ol>
+    <div class="panel small"><b>ChatGPT prompt:</b><p style="margin-top:6px" class="mono">Act as a copywriter for [business]. Our audience: [audience]. Our voice: [3 words]. Write an Instagram caption using the AIDA formula for [product]. Under 125 characters, one emoji, end with a clear call to action.</p></div>
+   </div>
+   <div class="stack">
+    <b>Edit every AI draft before you post</b>
+    <div class="checklist stack" id="audit" style="gap:0">
+     <label><input type="checkbox"><span>Sounds like our 3 voice words</span></label>
+     <label><input type="checkbox"><span>Talks to “you”, not about “we”</span></label>
+     <label><input type="checkbox"><span>Every feature has a benefit</span></label>
+     <label><input type="checkbox"><span>Facts, prices and dates are correct</span></label>
+     <label><input type="checkbox"><span>Removed clichés like “unlock”, “elevate”, “in today's world”</span></label>
+     <label><input type="checkbox"><span>Sentences are short; no paragraph over 3 lines</span></label>
+     <label><input type="checkbox"><span>Ends with one clear call to action</span></label>
+    </div>
+    <div class="box"><div class="row" style="justify-content:space-between"><b>Edit progress</b><span class="mono" id="auditCnt">0 / 7</span></div><div class="progress-mini" style="margin-top:8px"><i id="auditBar"></i></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L3 DIVIDER ============ -->
+<section class="slide divider" data-lec="3" data-title="Lecture 3: Blogging Strategy" id="L3">
+ <div class="wrap">
+  <div class="bign">03</div>
+  <div class="eyebrow"><span class="dot"></span>Lecture 3 of 4</div>
+  <h2>Blogging Strategy</h2>
+  <div class="grid2">
+   <div class="panel"><h3>By the end you can</h3><ul class="clean ticks" style="margin-top:10px">
+    <li>Plan a blog around content pillars and topic clusters</li>
+    <li>Turn a keyword into a structured blog outline</li>
+    <li>Balance helpful posts and promotional posts</li>
+    <li>Build a 4-week content calendar</li></ul></div>
+   <div class="panel"><h3>Today's lab</h3><p style="margin-top:10px">A blog plan: 1 pillar topic, 4 cluster posts, one full outline and a 4-week calendar.</p><p class="small muted" style="margin-top:8px">Tools: your Module 4 keyword sheet, Google “People also ask”, ChatGPT, Google Sheets</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L3: Cluster ============ -->
+<section class="slide" data-lec="3" data-title="Pillars and topic clusters">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 3 <span class="kind">· Concept · click any post</span></div>
+  <h2>One big guide, many small posts, all linked</h2>
+  <div class="split">
+   <div class="cluster" id="cluster">
+    <svg viewBox="0 0 300 300" preserveAspectRatio="none" aria-hidden="true"><line x1="150" y1="150" x2="50" y2="50"/><line x1="150" y1="150" x2="150" y2="50"/><line x1="150" y1="150" x2="250" y2="50"/><line x1="150" y1="150" x2="50" y2="150"/><line x1="150" y1="150" x2="250" y2="150"/><line x1="150" y1="150" x2="50" y2="250"/><line x1="150" y1="150" x2="150" y2="250"/><line x1="150" y1="150" x2="250" y2="250"/></svg>
+    <button class="cnode" data-n="1"><span class="ty">How-to</span>How to store a cake overnight</button>
+    <button class="cnode" data-n="2"><span class="ty">Guide</span>Cake sizes: how many slices per pound</button>
+    <button class="cnode" data-n="3"><span class="ty">List</span>10 birthday cake ideas for kids</button>
+    <button class="cnode" data-n="4"><span class="ty">Compare</span>Fondant vs buttercream: which to pick</button>
+    <button class="cnode hub" data-n="0"><span class="ty">Pillar page</span>The complete guide to ordering a birthday cake in Lahore</button>
+    <button class="cnode" data-n="5"><span class="ty">Local</span>Best areas in Lahore for party venues</button>
+    <button class="cnode" data-n="6"><span class="ty">FAQ</span>How early should you order a custom cake?</button>
+    <button class="cnode" data-n="7"><span class="ty">Story</span>Behind the scenes: a 3-tier wedding cake</button>
+    <button class="cnode" data-n="8"><span class="ty">Budget</span>How much does a birthday cake cost in 2026?</button>
+   </div>
+   <div class="stack">
+    <div class="panel info" id="clInfo" style="min-height:180px"><h3>Pillar + cluster</h3><p style="margin-top:8px">A <b>pillar page</b> covers a broad topic. <b>Cluster posts</b> each answer one specific question and link back to the pillar. Google sees you as an expert on the whole topic.</p></div>
+    <div class="box small"><b>Pick 3–4 content pillars</b> for your business. For Sweet Oven: <span class="tag">Cake guides</span> <span class="tag">Recipes &amp; tips</span> <span class="tag">Celebrations</span> <span class="tag">Behind the scenes</span></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L3: Outline builder ============ -->
+<section class="slide" data-lec="3" data-title="Blog outline builder">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 3 <span class="kind">· Hands-on · 8 min</span></div>
+  <h2>Turn one keyword into a blog outline</h2>
+  <p class="lead" style="font-size:1em">Pick a post type and type a keyword. The outline shows the structure Google and readers expect. You fill in the words.</p>
+  <div class="split">
+   <div class="stack" style="gap:14px">
+    <div class="field"><label for="obKw">Keyword</label><input id="obKw" value="birthday cake size"></div>
+    <div class="field"><label>Post type</label><div class="seg" id="obType"><button data-t="how">How-to</button><button data-t="list">List</button><button data-t="guide">Guide</button><button data-t="compare">Comparison</button></div></div>
+    <div class="box small"><b>Every post needs</b><ul class="clean ticks" style="margin-top:8px"><li>Keyword in the title, first paragraph and one H2</li><li>An answer in the first 100 words</li><li>2 or more links to your own posts and one to a trusted outside source</li><li>One image every 300 words or so, with alt text</li><li>A clear next step at the end</li></ul></div>
+   </div>
+   <div class="outline" id="outline"></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L3: Calendar ============ -->
+<section class="slide" data-lec="3" data-title="Content calendar planner">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 3 <span class="kind">· Interactive</span></div>
+  <h2>Plan a month: help first, sell second</h2>
+  <p class="lead" style="font-size:1em">Click any slot to change its pillar. Aim for no more than 1 promotional post in every 4. If every post sells, people stop listening.</p>
+  <div class="split">
+   <div class="cal" id="cal"></div>
+   <div class="stack">
+    <div class="box">
+     <div class="row" style="justify-content:space-between"><b>Your content mix</b><span class="pill" id="mixPill"></span></div>
+     <div class="mixbar" id="mixbar" style="margin-top:10px"></div>
+     <div class="mixleg" id="mixleg" style="margin-top:10px"></div>
+     <p class="small muted" id="mixMsg" style="margin-top:8px"></p>
+    </div>
+    <div class="row"><button class="btn ghost" id="calSales">Make it too salesy</button><button class="btn ghost" id="calReset">Balanced example</button></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L3: LAB ============ -->
+<section class="slide" data-lec="3" data-title="Lab 3: Blog plan">
+ <div class="wrap">
+  <div class="lab-head">
+   <div class="stack"><span class="labtag">Lab 3 · 30 min</span><h2>Plan your blog and your month</h2></div>
+   <div class="timer" data-min="30"><span class="t">30:00</span><button data-act="toggle">Start</button><button data-act="reset">Reset</button></div>
+  </div>
+  <div class="split">
+   <ol class="steps">
+    <li><span>Open your <b>Module 4 keyword sheet</b>. Pick the broadest keyword as your <b>pillar topic</b>.</span></li>
+    <li><span>Search it on Google. Copy 4 questions from <b>People also ask</b>. Each one becomes a <b>cluster post</b>.</span></li>
+    <li><span>Write a full outline for one cluster post: title, intro answer, 4–6 H2s, internal links and a call to action.</span></li>
+    <li><span>Build a <b>4-week calendar</b> in Google Sheets with columns: date, platform, pillar, topic, format, status.</span></li>
+    <li><span>No website yet? Publish the post on a free platform such as WordPress.com, Blogger or Medium.</span></li>
+   </ol>
+   <div class="stack">
+    <div class="deliver"><h3>You hand in</h3><ul class="clean ticks small"><li>Pillar topic + 4 cluster post titles</li><li>One complete blog outline</li><li>4-week content calendar (12 posts)</li></ul></div>
+    <div class="tablewrap">
+     <table class="sheet" style="min-width:520px">
+      <thead><tr><th>Date</th><th>Platform</th><th>Pillar</th><th>Topic</th><th>Format</th></tr></thead>
+      <tbody>
+       <tr class="ex"><td>Mon 12 Oct</td><td>Blog + FB</td><td>Cake guides</td><td>Cake sizes guide</td><td>Article</td></tr>
+       <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+       <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
+      </tbody>
+     </table>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L4 DIVIDER ============ -->
+<section class="slide divider" data-lec="4" data-title="Lecture 4: Email Marketing Introduction" id="L4">
+ <div class="wrap">
+  <div class="bign">04</div>
+  <div class="eyebrow"><span class="dot"></span>Lecture 4 of 4</div>
+  <h2>Email Marketing Introduction</h2>
+  <div class="grid2">
+   <div class="panel"><h3>By the end you can</h3><ul class="clean ticks" style="margin-top:10px">
+    <li>Explain why an email list is an asset you own</li>
+    <li>Grow a list with a lead magnet and consent</li>
+    <li>Write subject lines that get opened</li>
+    <li>Read open rate, click rate and unsubscribe rate</li></ul></div>
+   <div class="panel"><h3>Today's lab</h3><p style="margin-top:10px">Set up Mailchimp, build a signup form and send your first welcome email to classmates.</p><p class="small muted" style="margin-top:8px">Tools: Mailchimp (free plan), Canva, ChatGPT</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L4: Owned + funnel ============ -->
+<section class="slide" data-lec="4" data-title="Why email and how a list grows">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 4 <span class="kind">· Concept · click each step</span></div>
+  <h2>Followers are rented. Your email list is owned.</h2>
+  <div class="split">
+   <div class="stack">
+    <div class="owned">
+     <div class="box"><h3>Social media followers</h3><ul class="clean small" style="margin-top:6px;gap:4px"><li>The platform decides who sees your post</li><li>An account ban can erase them</li><li>You compete with every other feed</li></ul></div>
+     <div class="box" style="border-color:var(--l4)"><h3 style="color:var(--l4)">Email subscribers</h3><ul class="clean small" style="margin-top:6px;gap:4px"><li>Your message lands in their inbox</li><li>You can export and keep the list</li><li>They asked to hear from you</li></ul></div>
+    </div>
+    <div class="panel info" id="fInfo" style="min-height:150px"><h3>Click a step in the journey</h3><p class="muted" style="margin-top:6px">This is how a stranger becomes a repeat customer through email.</p></div>
+   </div>
+   <div class="funnel" id="funnel">
+    <button class="fstep" data-s="0" style="width:100%;background:#8E1446">Visitor<small>sees your post or blog</small></button>
+    <button class="fstep" data-s="1" style="width:88%;background:#A3174F">Lead magnet<small>free, useful offer</small></button>
+    <button class="fstep" data-s="2" style="width:76%;background:#BE185D">Signup form<small>with clear consent</small></button>
+    <button class="fstep" data-s="3" style="width:64%;background:#CF3A77">Welcome email<small>sent instantly</small></button>
+    <button class="fstep" data-s="4" style="width:52%;background:#DB5C8F">Nurture<small>helpful weekly emails</small></button>
+    <button class="fstep" data-s="5" style="width:40%;background:#E57CA6">Offer<small>first order</small></button>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L4: Subject line tester ============ -->
+<section class="slide" data-lec="4" data-title="Subject line tester">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 4 <span class="kind">· Hands-on · 8 min</span></div>
+  <h2>Will they open it? Test your subject line</h2>
+  <p class="lead" style="font-size:1em">Your email competes with everything else in the inbox. Write a subject line and preview text, then see how it looks on a phone.</p>
+  <div class="split">
+   <div class="stack">
+    <div class="field"><label for="sjIn">Subject line <span class="cnt" id="sjCnt">0</span></label><input id="sjIn" value="NEWSLETTER #1 - FREE CAKE!!! ACT NOW"></div>
+    <div class="field"><label for="phIn">Preview text <span class="muted small">shown after the subject</span></label><input id="phIn" value="Click here to see"></div>
+    <div class="row"><button class="btn ghost" id="sjGood">Show a strong example</button><button class="btn ghost" id="sjBad">Back to weak version</button></div>
+    <div class="box">
+     <div class="row" style="justify-content:space-between;margin-bottom:10px"><h3 style="font-size:1rem">Checks</h3><span><span class="scorebig" id="sjScore">0</span><span class="muted"> / 6</span></span></div>
+     <ul class="clean checks" id="sjChecks"></ul>
+    </div>
+   </div>
+   <div class="phone">
+    <div class="bar"><span>Inbox</span><span class="muted">9:41</span></div>
+    <div class="mail dim"><span class="av" style="background:#4C6EF5">D</span><div><div class="fr">Daraz <span>9:12</span></div><div class="sj">11.11 sale starts in 3 days</div><div class="ph">Wishlist your favourites now and get…</div></div></div>
+    <div class="mail you"><span class="av" style="background:var(--l4)">SO</span><div><div class="fr">Sweet Oven <span>9:40</span></div><div class="sj" id="pvSj"></div><div class="ph" id="pvPh"></div></div></div>
+    <div class="mail dim"><span class="av" style="background:#2F9E44">J</span><div><div class="fr">JazzCash <span>8:55</span></div><div class="sj">Your monthly statement is ready</div><div class="ph">View your transactions for September…</div></div></div>
+    <div class="mail dim"><span class="av" style="background:#E8590C">F</span><div><div class="fr">Foodpanda <span>8:30</span></div><div class="sj">Hungry? 30% off your next order 🍕</div><div class="ph">Use code at checkout before midnight…</div></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ L4: Metrics ============ -->
+<section class="slide" data-lec="4" data-title="Email metrics calculator">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Lecture 4 <span class="kind">· Interactive</span></div>
+  <h2>Read your campaign report like a marketer</h2>
+  <p class="lead" style="font-size:1em">Mailchimp shows these numbers after every send. Change the numbers to match a campaign and see what they mean.</p>
+  <div class="mfields">
+   <div class="field"><label for="mSent">Sent</label><input id="mSent" type="number" min="0" value="1000"></div>
+   <div class="field"><label for="mBounce">Bounced</label><input id="mBounce" type="number" min="0" value="18"></div>
+   <div class="field"><label for="mOpen">Opened</label><input id="mOpen" type="number" min="0" value="402"></div>
+   <div class="field"><label for="mClick">Clicked</label><input id="mClick" type="number" min="0" value="31"></div>
+   <div class="field"><label for="mUnsub">Unsubscribed</label><input id="mUnsub" type="number" min="0" value="3"></div>
+  </div>
+  <div class="rates" id="rates"></div>
+  <p class="small muted">Bands are a rough classroom guide; results vary by industry. Open rates are less reliable since Apple Mail began loading emails automatically, so judge campaigns mainly by clicks.</p>
+ </div>
+</section>
+
+<!-- ============ L4: LAB ============ -->
+<section class="slide" data-lec="4" data-title="Lab 4: First campaign in Mailchimp">
+ <div class="wrap">
+  <div class="lab-head">
+   <div class="stack"><span class="labtag">Lab 4 · 35 min</span><h2>Send your first email campaign</h2></div>
+   <div class="timer" data-min="35"><span class="t">35:00</span><button data-act="toggle">Start</button><button data-act="reset">Reset</button></div>
+  </div>
+  <div class="split">
+   <ol class="steps">
+    <li><span>Create a free <b>Mailchimp</b> account. Add your business details; every email must show a real contact address.</span></li>
+    <li><span>Set up your <b>Audience</b> and create a hosted <b>signup form</b> in your brand colours. Add a lead magnet line, such as “Get our free cake size chart”.</span></li>
+    <li><span>Swap signup links with 5 classmates and subscribe to each other's lists. Only add people who agreed.</span></li>
+    <li><span>Build a <b>welcome email</b> from a template: logo, greeting, what to expect, the lead magnet and one button.</span></li>
+    <li><span>Send a test to yourself and check it on your phone. Then send to your list and watch the report together next class.</span></li>
+   </ol>
+   <div class="stack">
+    <div class="deliver"><h3>You hand in</h3><ul class="clean ticks small"><li>Signup form link</li><li>Screenshot of the welcome email on mobile</li><li>Subject line + 2 alternatives</li><li>Campaign report screenshot</li></ul></div>
+    <div class="box"><div class="row" style="justify-content:space-between"><b>Welcome email starter</b><button class="btn ghost" data-copy="welcome">Copy</button></div>
+<div class="copyblock" id="welcome" style="margin-top:8px">Subject: Your cake size chart is here 🎂
+Preview: Plus what to expect from us
+
+Hi *|FNAME|*,
+
+Thanks for joining [Business]! Here is your free [lead magnet]: [button]
+
+Every [day of week] we will send you one useful thing: [what they get].
+
+Reply and tell us: [one simple question]?
+
+[Your name], [Business]</div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="slide" data-lec="5" data-title="Module 5 quiz" id="WRAP">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Module review <span class="kind">· 7 questions</span></div>
+  <h2>Content &amp; branding quick-fire quiz</h2>
+  <div class="quiz" id="quiz"></div>
+ </div>
+</section>
+
+<!-- ============ PROJECT ============ -->
+<section class="slide" data-lec="5" data-title="Module project and next steps">
+ <div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Module project</div>
+  <h2>Your Brand &amp; Content Kit</h2>
+  <p class="lead">Combine your four labs into one kit for your business. Due before Module 6 starts. Freelance clients will ask for exactly this, so it goes straight into your portfolio.</p>
+  <div class="grid4">
+   <div class="box" style="--lc:var(--l1)"><span class="eyebrow"><span class="dot"></span>From Lab 1</span><h3 style="margin-top:6px">Brand kit</h3><p class="small muted">Positioning, logo, colours, fonts, voice and 3 templates.</p></div>
+   <div class="box" style="--lc:var(--l2)"><span class="eyebrow"><span class="dot"></span>From Lab 2</span><h3 style="margin-top:6px">Copy samples</h3><p class="small muted">Caption, post and product description, one formula each.</p></div>
+   <div class="box" style="--lc:var(--l3)"><span class="eyebrow"><span class="dot"></span>From Lab 3</span><h3 style="margin-top:6px">Blog plan</h3><p class="small muted">Pillar, 4 clusters, one outline and a 4-week calendar.</p></div>
+   <div class="box" style="--lc:var(--l4)"><span class="eyebrow"><span class="dot"></span>From Lab 4</span><h3 style="margin-top:6px">Email setup</h3><p class="small muted">Signup form, welcome email and first report.</p></div>
+  </div>
+  <div class="panel row" style="justify-content:space-between">
+   <div><b>Next up: Module 6 · Freelancing &amp; Client Hunting</b><p class="small muted">Your Brand &amp; Content Kit becomes the first sample in your Fiverr and Upwork portfolio.</p></div>
+   <button class="btn" data-goto="first">Back to start</button>
+  </div>
+ </div>
+</section>
+
+  </main>
+
+  <footer class="footer">
+    <button class="navbtn" id="prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <span class="navtitle" id="navtitle"></span>
+    <div class="track" id="track"></div>
+    <span class="keyhint"><kbd>←</kbd> <kbd>→</kbd> to move</span>
+    <button class="navbtn next" id="next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </footer>
+</div>
+<script>
+(function(){
+  const $ = (s, r=document) => r.querySelector(s);
+  const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  /* ================= NAVIGATION ================= */
+  const slides = $$('.slide');
+  const lecColor = {0:'var(--l0)',1:'var(--l1)',2:'var(--l2)',3:'var(--l3)',4:'var(--l4)',5:'var(--l0)'};
+  let cur = 0;
+  const track = $('#track');
+  slides.forEach((s,i) => {
+    const b = document.createElement('button');
+    b.style.setProperty('--c', lecColor[s.dataset.lec]);
+    b.setAttribute('aria-label', 'Slide ' + (i+1) + ': ' + s.dataset.title);
+    b.title = (i+1) + '. ' + s.dataset.title;
+    b.addEventListener('click', () => go(i));
+    track.appendChild(b);
+  });
+  const jumpDefs = [['Intro',0,'var(--l0)'],['L1',1,'var(--l1)'],['L2',2,'var(--l2)'],['L3',3,'var(--l3)'],['L4',4,'var(--l4)'],['Review',5,'var(--l0)']];
+  const jumps = $('#jumps');
+  jumpDefs.forEach(([label, lec, c]) => {
+    const b = document.createElement('button');
+    b.textContent = label; b.dataset.lec = lec; b.style.setProperty('--jc', c);
+    b.addEventListener('click', () => go(slides.findIndex(s => s.dataset.lec == lec)));
+    jumps.appendChild(b);
+  });
+  function go(i){
+    i = Math.max(0, Math.min(slides.length-1, i));
+    const dir = i >= cur ? 1 : -1;
+    slides.forEach((s,k) => { s.classList.toggle('active', k===i); s.classList.toggle('back', k<i); });
+    cur = i;
+    slides[i].scrollTop = 0;
+    $('#counter').textContent = (i+1) + ' / ' + slides.length;
+    $('#navtitle').textContent = slides[i].dataset.title;
+    $$('button', track).forEach((b,k) => { b.classList.toggle('seen', k<=i); b.classList.toggle('cur', k===i); });
+    $$('button', jumps).forEach(b => b.setAttribute('aria-current', b.dataset.lec == slides[i].dataset.lec ? 'true' : 'false'));
+    $('#prev').disabled = i===0; $('#next').disabled = i===slides.length-1;
+    try { history.replaceState(null, '', '#s' + (i+1)); } catch(e){}
+  }
+  $('#prev').addEventListener('click', () => go(cur-1));
+  $('#next').addEventListener('click', () => go(cur+1));
+  document.addEventListener('keydown', e => {
+    const t = e.target;
+    if (t.closest && (t.closest('input,textarea,[contenteditable="true"]'))) return;
+    if (['ArrowRight','PageDown'].includes(e.key) || (e.key===' ' && !t.closest('button'))) { e.preventDefault(); go(cur+1); }
+    else if (['ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); go(cur-1); }
+    else if (e.key==='Home') go(0);
+    else if (e.key==='End') go(slides.length-1);
+  });
+  let tx=null, ty=null;
+  const stage = $('#stage');
+  stage.addEventListener('touchstart', e => {
+    if (e.target.closest('input,textarea,[contenteditable="true"],.code,.tablewrap')) { tx=null; return; }
+    tx = e.touches[0].clientX; ty = e.touches[0].clientY;
+  }, {passive:true});
+  stage.addEventListener('touchend', e => {
+    if (tx===null) return;
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)*1.5) go(cur + (dx<0 ? 1 : -1));
+    tx = null;
+  });
+  $$('[data-goto]').forEach(b => b.addEventListener('click', () => {
+    const g = b.dataset.goto;
+    if (g==='first') return go(0);
+    go(slides.findIndex(s => s.id === g));
+  }));
+  const h = (location.hash||'').match(/^#s(\d+)$/);
+  go(h ? parseInt(h[1],10)-1 : 0);
+
+  /* ================= COVER TYPING ================= */
+  const queries = ['Fresh out of the oven: Chocolate Fudge Cake 🍫', 'Forgot the birthday? Order by 2 pm.', 'Behind the scenes: our 5 am bake', 'Your free cake size chart is here 🎂'];
+  const tq = $('#typeq');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) tq.textContent = queries[0];
+  else {
+    let qi=0, ci=0, del=false;
+    (function tick(){
+      const q = queries[qi];
+      if (!del){ ci++; tq.textContent = [...q].slice(0,ci).join(''); if (ci===[...q].length){ del=true; return setTimeout(tick,1600);} }
+      else { ci--; tq.textContent = [...q].slice(0,ci).join(''); if (ci===0){ del=false; qi=(qi+1)%queries.length; } }
+      setTimeout(tick, del ? 35 : 85);
+    })();
+  }
+
+  /* ================= REVEAL / COPY ================= */
+  $$('[data-reveal]').forEach(b => b.addEventListener('click', () => { const el = document.getElementById(b.dataset.reveal); el.hidden = !el.hidden; b.textContent = el.hidden ? 'Show answer' : 'Hide answer'; }));
+  $$('[data-copy]').forEach(b => b.addEventListener('click', () => {
+    const el = document.getElementById(b.dataset.copy);
+    const done = () => { b.textContent = 'Copied'; setTimeout(() => b.textContent = 'Copy', 1600); };
+    const fallback = () => { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected: press Ctrl + C'; setTimeout(() => b.textContent = 'Copy', 2400); };
+    try { navigator.clipboard.writeText(el.innerText).then(done, fallback); } catch(e){ fallback(); }
+  }));
+
+
+  /* ================= ICEBERG ================= */
+  const berg = {
+    logo:['Logo','above','The symbol people recognise. It reminds customers of the brand, but it cannot create trust on its own.'],
+    name:['Name','above','Easy to say, spell and search. Check that the Instagram handle and domain are free before you decide.'],
+    colors:['Colours & fonts','above','Used the same way everywhere, they make your posts recognisable before anyone reads the name.'],
+    tag:['Tagline','above','A short line that states your promise, such as “Baked today, delivered today”.'],
+    purpose:['Purpose','below','Why the business exists beyond making money. Sweet Oven: make every family celebration feel special.'],
+    values:['Values','below','The rules you will not break, such as fresh ingredients only, honest prices and on-time delivery.'],
+    promise:['Promise','below','What customers can always expect. Break it once and the logo will not save you.'],
+    audience:['Audience','below','The exact people you serve. A brand for everyone ends up memorable to no one.'],
+    voice:['Voice & personality','below','How the brand talks: words, tone, emoji, humour. You will set yours on the sliders slide.'],
+    exp:['Customer experience','below','Every touchpoint: how fast you reply on WhatsApp, the packaging, the delivery rider, the follow-up message.']
+  };
+  $$('.icechip').forEach(c => c.addEventListener('click', () => {
+    $$('.icechip').forEach(x => x.classList.toggle('on', x===c));
+    const [t, where, d] = berg[c.dataset.k];
+    $('#bergInfo').innerHTML = `<div class="row" style="justify-content:space-between"><h3>${esc(t)}</h3><span class="pill ${where==='above'?'warn':'good'}">${where==='above'?'Above the water: seen':'Below the water: felt'}</span></div><p style="margin-top:8px">${esc(d)}</p>`;
+  }));
+
+  /* ================= POSITIONING ================= */
+  const pIds = ['pAud','pNeed','pBrand','pCat','pBen','pProof'];
+  function madlib(){
+    const v = Object.fromEntries(pIds.map(id => [id, esc($('#'+id).value.trim() || '…')]));
+    $('#madlib').innerHTML = `For <span class="slot">${v.pAud}</span> who <span class="slot">${v.pNeed}</span>, <span class="slot">${v.pBrand}</span> is the <span class="slot">${v.pCat}</span> that <span class="slot">${v.pBen}</span>, because <span class="slot">${v.pProof}</span>.`;
+  }
+  pIds.forEach(id => $('#'+id).addEventListener('input', madlib)); madlib();
+
+  /* ================= VOICE SLIDERS ================= */
+  const vIds = ['vFormal','vPlay','vMod','vFriend'];
+  const lvl = x => x < 34 ? 0 : x < 67 ? 1 : 2;
+  function voice(){
+    const [f,p,m,fr] = vIds.map(id => lvl(+$('#'+id).value));
+    const open = ['We are pleased to introduce our new','Meet our new','Okay, you NEED to try our new'][f];
+    const cake = ' Chocolate Fudge Cake' + (p===2 ? ' 🍫😍' : p===1 ? ' 🍫' : '') + '.';
+    const desc = [' Rich, dense and crafted with care.',' Rich, fudgy and seriously chocolatey.',' Ridiculously gooey, dangerously good, zero regrets.'][p];
+    const orig = [' Made from our family recipe, the same one since 1998.',' A classic recipe with a fresh twist.',' Made with single-origin cocoa and a 70% dark ganache.'][m];
+    const cta = [' Only 20 made each day. Reserve yours at the link in bio.',' Order by 2 pm for same-day delivery.',' DM us and we will save one just for you' + (p>0?' 💌':'') + '!'][fr];
+    $('#caption').textContent = ' ' + open + cake + desc + orig + cta;
+    const words = [['Polished','Warm','Chatty'][f], ['Calm','Cheerful','Cheeky'][p], ['Heritage','Fresh','Trendy'][m], ['Premium','Helpful','Neighbourly'][fr]];
+    const pick = [words[1], words[f===1?3:0], words[2]];
+    $('#voiceWords').innerHTML = [...new Set(pick)].map(w => `<span class="tag">${w}</span>`).join('');
+  }
+  vIds.forEach(id => $('#'+id).addEventListener('input', voice));
+  const presets = {luxury:[10,15,40,10], fun:[95,95,80,90], family:[55,45,5,85]};
+  $$('[data-preset]').forEach(b => b.addEventListener('click', () => { presets[b.dataset.preset].forEach((v,i) => $('#'+vIds[i]).value = v); voice(); }));
+  voice();
+
+  /* ================= BRAND KIT ================= */
+  const colors = [
+    ['#7A3E2E','Chocolate brown','warm, homemade, comforting'],
+    ['#C2185B','Berry pink','sweet, fun, celebratory'],
+    ['#1F4E79','Deep blue','trust, calm, professional'],
+    ['#2E7D32','Leaf green','fresh, natural, healthy'],
+    ['#F2A900','Golden yellow','happy, energetic, affordable'],
+    ['#1C1C1C','Charcoal black','premium, elegant, luxury'],
+    ['#6A1B9A','Royal purple','creative, special, indulgent']
+  ];
+  const fonts = {elegant:['"Fraunces", Georgia, serif',600], friendly:['"Fredoka", "Trebuchet MS", sans-serif',600], bold:['"Archivo Black", Impact, sans-serif',400]};
+  let kCol = 0, kFont = 'friendly';
+  const sws = $('#swatches');
+  colors.forEach(([hex,name],i) => { const b = document.createElement('button'); b.className='sw'; b.style.background=hex; b.title=name; b.setAttribute('aria-label', name); b.addEventListener('click', () => { kCol=i; kit(); }); sws.appendChild(b); });
+  $$('#fontSeg button').forEach(b => b.addEventListener('click', () => { kFont=b.dataset.f; kit(); }));
+  function lum(hex){ const c=[1,3,5].map(i=>parseInt(hex.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)); return .2126*c[0]+.7152*c[1]+.0722*c[2]; }
+  function kit(){
+    const [hex,name,mean] = colors[kCol]; const [ff,fw] = fonts[kFont];
+    const fg = lum(hex) > .35 ? '#1C1C1C' : '#FFFFFF';
+    const accent = '#F6E7D8', neutral = '#FFFDF9';
+    $$('.sw', sws).forEach((s,i) => s.classList.toggle('on', i===kCol));
+    $$('#fontSeg button').forEach(b => b.classList.toggle('on', b.dataset.f===kFont));
+    $('#swMeaning').textContent = name + ' often feels ' + mean + '.';
+    const nm = $('#kName').value.trim() || 'Your Brand';
+    const initials = nm.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    const mk = $('#mark'); mk.textContent = initials; mk.style.background = hex; mk.style.color = fg; mk.style.fontFamily = ff; mk.style.fontWeight = fw;
+    const bn = $('#bName'); bn.textContent = nm; bn.style.fontFamily = ff; bn.style.fontWeight = fw; bn.style.color = lum(hex) > .35 ? '#1C1C1C' : hex;
+    $('#bTag').textContent = $('#kTag').value;
+    const ps = $('#postsq'); ps.style.background = hex; ps.style.color = fg;
+    $('.big', ps).style.fontFamily = ff; $('.big', ps).style.fontWeight = fw;
+    $('#pHandle').textContent = '@' + nm.toLowerCase().replace(/[^a-z0-9]+/g,'');
+    $('#hexes').innerHTML = [[hex,'Primary'],[accent,'Accent'],[neutral,'Neutral']].map(([h,l]) => `<span><i style="background:${h};box-shadow:0 0 0 1px var(--line)"></i>${l} ${h.toUpperCase()}</span>`).join('') + `<span>Heading: ${ff.split(',')[0].replace(/"/g,'')}</span>`;
+  }
+  ['kName','kTag'].forEach(id => $('#'+id).addEventListener('input', kit)); kit();
+
+  /* ================= FLIP CARDS ================= */
+  $$('.flip').forEach(f => f.addEventListener('click', () => f.classList.toggle('open')));
+
+  /* ================= FORMULAS ================= */
+  const formulas = {
+    aida:{use:'Best for: ads, Instagram captions and landing pages.', parts:[['A','Attention','Stop the scroll','#8B2FC9'],['I','Interest','Give a reason to keep reading','#0E7490'],['D','Desire','Make them want it','#B45309'],['A','Action','Tell them exactly what to do','#BE185D']],
+      ex:['Forgot it’s her birthday tonight? 😱','Sweet Oven bakes custom cakes and delivers anywhere in Lahore the same day.','Picture her face when a fresh chocolate fudge cake with her name on it arrives at the door.','Order on WhatsApp by 2 pm: 0300 1234567.']},
+    pas:{use:'Best for: Facebook posts, emails and any product that solves a pain.', parts:[['P','Problem','Name the pain','#8B2FC9'],['A','Agitate','Show why it hurts','#0E7490'],['S','Solution','Present your offer','#B45309']],
+      ex:['Ordered a “custom” cake that looked nothing like the picture?','Now the guests are arriving, the photos are ruined and there is no time to fix it.','At Sweet Oven we send you a photo of your cake before it leaves the kitchen. If it isn’t right, we fix it free. Message us to book.']},
+    bab:{use:'Best for: product descriptions, testimonials and before/after results.', parts:[['B','Before','Life with the problem','#8B2FC9'],['A','After','Life once it is solved','#0E7490'],['B','Bridge','Your product gets them there','#B45309']],
+      ex:['Before: three hours of baking the night before the party, and a cake that sinks in the middle.','After: you spend the evening decorating with the kids while a perfect cake waits in the fridge.','Bridge: Sweet Oven’s ready-to-celebrate cakes, delivered the same day. Choose your flavour online.']}
+  };
+  function showFormula(k){
+    const F = formulas[k];
+    $$('#ftabs button').forEach(b => b.classList.toggle('on', b.dataset.f===k));
+    $('#fparts').innerHTML = F.parts.map(([l,n,d,c]) => `<div class="fpart"><span class="lt" style="background:${c}">${l}</span><div><b>${n}</b><span>${d}</span></div></div>`).join('');
+    $('#fexample').innerHTML = `<div class="small muted" style="margin-bottom:6px;font-weight:700">Sweet Oven example</div>` + F.ex.map((s,i) => `<span class="seg-t" style="background:${F.parts[i][3]}1A;box-shadow:inset 0 -2px 0 ${F.parts[i][3]}">${esc(s)}</span>`).join(' ');
+    $('#fuse').textContent = F.use;
+  }
+  $$('#ftabs button').forEach(b => b.addEventListener('click', () => showFormula(b.dataset.f)));
+  showFormula('aida');
+
+  /* ================= HEADLINE ANALYZER ================= */
+  const power = ['free','new','easy','proven','secret','simple','best','ultimate','quick','perfect','essential','complete','surprising','mistakes','avoid','love','instantly','step-by-step','beginner','guide','ideas','tips','actually','secretly','right'];
+  function headline(){
+    const h = $('#hlIn').value, k = $('#hlKw').value.trim().toLowerCase(), hl = h.toLowerCase();
+    const words = h.trim().split(/\s+/).filter(Boolean);
+    $('#hlShow').textContent = h || 'Start typing a headline';
+    const cnt = $('#hlCnt'); cnt.textContent = h.length + ' chars · ' + words.length + ' words';
+    cnt.className = 'cnt ' + (h.length>=40 && h.length<=70 ? 'good' : h.length ? 'warn' : 'bad');
+    const letters = h.replace(/[^A-Za-z]/g,'');
+    const caps = letters.length > 4 && letters.replace(/[^A-Z]/g,'').length / letters.length > .6;
+    const checks = [
+      [words.length>=6 && words.length<=13, 'Between 6 and 13 words', `Now ${words.length}`, 20],
+      [h.length>=40 && h.length<=70, 'Between 40 and 70 characters so it is not cut off', `Now ${h.length}`, 15],
+      [k && hl.includes(k), 'Includes your keyword', k ? `Add “${k}”` : 'Type a keyword', 20],
+      [/\d/.test(h), 'Uses a number', 'e.g. 7 ideas, 2026, 3 steps', 15],
+      [power.some(w => new RegExp('\\b'+w+'\\b','i').test(h)), 'Has a power word', 'e.g. easy, proven, mistakes, ideas', 10],
+      [/^(how|why|what|when|which|\d)/i.test(h.trim()) || /\?$/.test(h.trim()), 'Promises an answer (How, Why, What or a number)', '', 10],
+      [!caps && !/!!|\?\?/.test(h), 'No ALL CAPS or “!!!”', 'It looks like spam', 10]
+    ];
+    const score = checks.reduce((s,c) => s + (c[0] ? c[3] : 0), 0);
+    $('#hlChecks').innerHTML = checks.map(([ok,l,hint]) => `<li class="${ok?'pass':'fail'}"><i>${ok?'✓':'✕'}</i><span>${l}${!ok && hint ? ` <span class="muted">· ${esc(hint)}</span>` : ''}</span></li>`).join('');
+    const s = $('#hlScore'); s.textContent = score; s.style.color = score>=80 ? 'var(--good)' : score>=50 ? 'var(--warn)' : 'var(--bad)';
+  }
+  ['hlIn','hlKw'].forEach(id => $('#'+id).addEventListener('input', headline));
+  $$('#hlEx button').forEach(b => b.addEventListener('click', () => { $('#hlIn').value = b.textContent; headline(); }));
+  headline();
+
+  /* ================= CLUSTER ================= */
+  const clInfo = [
+    ['Pillar page','A long, complete guide (often 2,000+ words) on the broad topic. It links out to every cluster post and targets your main keyword from Module 4.'],
+    ['Cluster: how-to','Answers one practical question. Links back to the pillar with anchor text such as “ordering a birthday cake”.'],
+    ['Cluster: guide','A focused reference people bookmark and share. A strong candidate for a lead magnet in Lecture 4.'],
+    ['Cluster: list','List posts are easy to skim and share on Pinterest and Facebook. Each idea can link to a product.'],
+    ['Cluster: comparison','Catches people who are deciding. Commercial intent from Module 4: these readers are close to buying.'],
+    ['Cluster: local','Local posts help you rank for Lahore searches and earn links from venues you mention.'],
+    ['Cluster: FAQ','Copy the question exactly as people type it. Answer it in the first two sentences.'],
+    ['Cluster: story','Behind-the-scenes posts build the brand from Lecture 1. They also make great Reels.'],
+    ['Cluster: budget','Price questions get high search volume. Be honest; give ranges and what changes the price.']
+  ];
+  $$('.cnode').forEach(n => n.addEventListener('click', () => {
+    $$('.cnode').forEach(x => x.classList.toggle('on', x===n));
+    const [t,d] = clInfo[+n.dataset.n];
+    $('#clInfo').innerHTML = `<h3>${t}</h3><p style="margin-top:8px">${d}</p>`;
+  }));
+
+  /* ================= OUTLINE BUILDER ================= */
+  let obT = 'how';
+  const cap = s => s.replace(/\b\w/g, c => c.toUpperCase());
+  function outline(){
+    const k = $('#obKw').value.trim() || 'your keyword', K = cap(k);
+    $$('#obType button').forEach(b => b.classList.toggle('on', b.dataset.t===obT));
+    const O = {
+      how:{t:`How to Choose the Right ${K}: A Step-by-Step Guide`, len:'800–1,200 words', h2:[`What you need to know before choosing a ${k}`,'Step 1: …','Step 2: …','Step 3: …','Common mistakes to avoid',`FAQ: quick answers about ${k}`]},
+      list:{t:`9 ${K} Ideas for Every Budget`, len:'1,000–1,500 words', h2:['1. … (one idea per H2, with a photo)','2. …','3. …','… continue to 9',`How to pick the right ${k} for you`]},
+      guide:{t:`${K}: The Complete Guide (2026)`, len:'2,000+ words · this is a pillar page', h2:[`What is ${k}?`,`Why ${k} matters`,`Types of ${k}`,`How to choose`,`Costs and budget`,`Frequently asked questions`]},
+      compare:{t:`${K}: Option A vs Option B, Which Is Better?`, len:'1,000–1,500 words', h2:['Quick answer (comparison table)','Option A: pros and cons','Option B: pros and cons','Which one should you choose?','Our recommendation']}
+    }[obT];
+    $('#outline').innerHTML = `<div class="row" style="justify-content:space-between"><span class="o-tag">TITLE</span><span class="o-note">${O.len}</span></div><div class="o-h1">${esc(O.t)}</div>
+      <div class="o-row"><span class="o-tag">INTRO</span><span>Answer the question in 2–3 sentences. Include “${esc(k)}”.</span></div>
+      ${O.h2.map(h => `<div class="o-row"><span class="o-tag">H2</span><span>${esc(h)}</span></div>`).join('')}
+      <div class="o-row"><span class="o-tag">LINKS</span><span class="o-note">Link to the pillar page and 2 related posts</span></div>
+      <div class="o-row"><span class="o-tag">CTA</span><span>Ready to order? Message us on WhatsApp or get our free size chart by email.</span></div>
+      <div class="o-row"><span class="o-tag">META</span><span class="o-note">Title ≤ 60 chars, description 120–160 chars (Module 4)</span></div>`;
+  }
+  $('#obKw').addEventListener('input', outline);
+  $$('#obType button').forEach(b => b.addEventListener('click', () => { obT = b.dataset.t; outline(); }));
+  outline();
+
+  /* ================= CALENDAR ================= */
+  const pillars = [
+    ['edu','Educate','#0E7490',['Cake size guide','How to store cake','Fondant vs buttercream','Party planning tips']],
+    ['bts','Behind the scenes','#8B2FC9',['Meet the baker','Morning bake Reel','Packing an order','Decorating time-lapse']],
+    ['story','Customer stories','#0B8A5A',['Review of the week','Birthday photo repost','Customer Q&A','Wedding cake story']],
+    ['promo','Promote','#BE185D',['New flavour launch','Weekend discount','Order reminder','Festive box pre-order']]
+  ];
+  const balanced = [0,1,2, 0,3,1, 2,0,1, 0,2,3];
+  let calState = balanced.slice();
+  const calEl = $('#cal');
+  function cal(){
+    calEl.innerHTML = '<span></span><span class="ch">Mon</span><span class="ch">Wed</span><span class="ch">Fri</span>' +
+      [0,1,2,3].map(w => `<span class="wk">Week ${w+1}</span>` + [0,1,2].map(d => { const i=w*3+d, p=pillars[calState[i]]; return `<button class="cell p-${p[0]}" data-i="${i}"><b>${p[1]}</b>${p[3][(i)%4]}</button>`; }).join('')).join('');
+    $$('.cell', calEl).forEach(c => c.addEventListener('click', () => { const i=+c.dataset.i; calState[i]=(calState[i]+1)%4; cal(); }));
+    const counts = [0,0,0,0]; calState.forEach(p => counts[p]++);
+    $('#mixbar').innerHTML = counts.map((n,i) => `<span style="width:${n/12*100}%;background:${pillars[i][2]}"></span>`).join('');
+    $('#mixleg').innerHTML = counts.map((n,i) => `<span><i style="background:${pillars[i][2]}"></i>${pillars[i][1]} ${n}</span>`).join('');
+    const promo = counts[3], pill = $('#mixPill');
+    if (promo > 3){ pill.className='pill bad'; pill.textContent='Too salesy'; $('#mixMsg').textContent = `${promo} of 12 posts sell. Followers will scroll past. Swap some for helpful or story posts.`; }
+    else if (promo === 0){ pill.className='pill warn'; pill.textContent='No offers'; $('#mixMsg').textContent = 'Helpful content builds trust, but add 1–3 promotional posts so people know how to buy.'; }
+    else if (counts.some(n => n===0)){ pill.className='pill warn'; pill.textContent='Missing a pillar'; $('#mixMsg').textContent = 'Use every pillar at least once a month to keep the feed varied.'; }
+    else { pill.className='pill good'; pill.textContent='Good mix'; $('#mixMsg').textContent = `${12-promo} helpful posts and ${promo} promotional. People trust you enough to buy.`; }
+  }
+  $('#calSales').addEventListener('click', () => { calState = [3,3,0,3,3,1,3,3,2,3,3,3]; cal(); });
+  $('#calReset').addEventListener('click', () => { calState = balanced.slice(); cal(); });
+  cal();
+
+  /* ================= FUNNEL ================= */
+  const fInfo = [
+    ['Visitor','Someone finds you through a post, a Reel, your blog (Lecture 3) or Google (Module 4). They like you, but they are not ready to buy.'],
+    ['Lead magnet','A free, useful thing in exchange for an email: a cake size chart, a party checklist, a 10% first-order code. It must be useful to your exact audience.'],
+    ['Signup form','Ask for email and first name only. Say clearly what they will receive and how often. Only add people who agreed; never buy email lists.'],
+    ['Welcome email','Sent automatically right after signup. It usually gets the highest opens of any email you send. Deliver the lead magnet and set expectations.'],
+    ['Nurture','Regular helpful emails from your content pillars: tips, stories, new blog posts. Keep a steady schedule, such as every Thursday.'],
+    ['Offer','Once trust is built, make a clear offer: a new flavour, a festive box, a limited discount. Promote in about 1 of every 4 emails.']
+  ];
+  $$('.fstep').forEach(s => s.addEventListener('click', () => {
+    $$('.fstep').forEach(x => x.classList.toggle('on', x===s));
+    const [t,d] = fInfo[+s.dataset.s];
+    $('#fInfo').innerHTML = `<h3>${t}</h3><p style="margin-top:6px">${d}</p>`;
+  }));
+
+  /* ================= SUBJECT LINE ================= */
+  const spam = ['free!','act now','click here','winner','100%','guaranteed','urgent','$$$','cash','limited time!!!','buy now','risk-free','congratulations'];
+  const sjWeak = ['NEWSLETTER #1 - FREE CAKE!!! ACT NOW','Click here to see'];
+  const sjStrong = ['*|FNAME|*, your cake size chart is here 🎂','Plus 3 party ideas our customers love'];
+  function subject(){
+    const s = $('#sjIn').value, p = $('#phIn').value, sl = s.toLowerCase();
+    const shown = s.replace(/\*\|FNAME\|\*/g, 'Ayesha');
+    const pv = $('#pvSj'); pv.textContent = shown || '(no subject)';
+    $('#pvPh').textContent = p || shown;
+    const cnt = $('#sjCnt'); cnt.textContent = shown.length + ' / 50';
+    cnt.className = 'cnt ' + (shown.length>=20 && shown.length<=50 ? 'good' : shown.length ? 'warn' : 'bad');
+    const letters = s.replace(/[^A-Za-z]/g,'');
+    const caps = letters.length > 4 && letters.replace(/[^A-Z]/g,'').length / letters.length > .5;
+    const checks = [
+      [shown.length>=20 && shown.length<=50, 'Between 20 and 50 characters so phones show all of it', `Now ${shown.length}`],
+      [!caps, 'Not in ALL CAPS', 'Looks like shouting'],
+      [(s.match(/!/g)||[]).length <= 1, 'One exclamation mark at most', ''],
+      [!spam.some(w => sl.includes(w)), 'No spam trigger words', 'e.g. FREE!, act now, click here'],
+      [p.trim().length >= 15 && p.trim().toLowerCase() !== sl && !/click here|view in browser/i.test(p), 'Preview text adds new information', 'Write a second hook'],
+      [/\*\|FNAME\|\*|\byou\b|\byour\b|\?/i.test(s), 'Speaks to the reader (name, “you” or a question)', 'Try *|FNAME|*']
+    ];
+    $('#sjChecks').innerHTML = checks.map(([ok,l,hint]) => `<li class="${ok?'pass':'fail'}"><i>${ok?'✓':'✕'}</i><span>${l}${!ok && hint ? ` <span class="muted">· ${esc(hint)}</span>` : ''}</span></li>`).join('');
+    const n = checks.filter(c=>c[0]).length, sc = $('#sjScore'); sc.textContent = n;
+    sc.style.color = n>=5 ? 'var(--good)' : n>=3 ? 'var(--warn)' : 'var(--bad)';
+  }
+  ['sjIn','phIn'].forEach(id => $('#'+id).addEventListener('input', subject));
+  $('#sjGood').addEventListener('click', () => { [$('#sjIn').value, $('#phIn').value] = sjStrong; subject(); });
+  $('#sjBad').addEventListener('click', () => { [$('#sjIn').value, $('#phIn').value] = sjWeak; subject(); });
+  subject();
+
+  /* ================= METRICS ================= */
+  const mIds = ['mSent','mBounce','mOpen','mClick','mUnsub'];
+  function metrics(){
+    const [sent,bounce,open,click,unsub] = mIds.map(id => Math.max(0, parseFloat($('#'+id).value) || 0));
+    const deliv = Math.max(0, sent - bounce);
+    const pct = (a,b) => b ? a/b*100 : 0;
+    const R = [
+      ['Open rate', pct(open,deliv), 'opened ÷ delivered', v => v>=35?['good','Strong']:v>=20?['warn','Average']:['bad','Low'], 'Low? Test new subject lines and send times.'],
+      ['Click rate', pct(click,deliv), 'clicked ÷ delivered', v => v>=3?['good','Strong']:v>=1.5?['warn','Average']:['bad','Low'], 'Low? Use one clear button and a stronger offer.'],
+      ['Bounce rate', pct(bounce,sent), 'bounced ÷ sent', v => v<=2?['good','Healthy']:v<=5?['warn','Watch']:['bad','Clean your list'], 'High? Remove fake and mistyped addresses.'],
+      ['Unsubscribe rate', pct(unsub,deliv), 'unsubscribed ÷ delivered', v => v<=.5?['good','Healthy']:v<=1?['warn','Watch']:['bad','Too high'], 'High? You may be emailing too often or off-topic.']
+    ];
+    $('#rates').innerHTML = R.map(([n,v,f,band,tip]) => { const [c,l] = band(v); return `<div class="rate"><div class="row" style="justify-content:space-between"><b>${n}</b><span class="pill ${c}">${l}</span></div><span class="rv" style="color:var(--${c})">${v.toFixed(1)}%</span><span class="rf">${f}</span><span class="small muted">${tip}</span></div>`; }).join('');
+  }
+  mIds.forEach(id => $('#'+id).addEventListener('input', metrics)); metrics();
+
+  /* ================= AUDIT CHECKLIST ================= */
+  const auditBoxes = $$('#audit input');
+  const updAudit = () => { const n = auditBoxes.filter(b => b.checked).length; $('#auditCnt').textContent = n + ' / ' + auditBoxes.length; $('#auditBar').style.width = (n/auditBoxes.length*100)+'%'; };
+  auditBoxes.forEach(b => b.addEventListener('change', updAudit));
+
+  /* ================= TIMERS ================= */
+  $$('.timer').forEach(tm => {
+    const total = parseInt(tm.dataset.min,10)*60; let left = total, iv = null;
+    const t = $('.t', tm), tog = $('[data-act="toggle"]', tm), rst = $('[data-act="reset"]', tm);
+    const show = () => { t.textContent = String(Math.floor(left/60)).padStart(2,'0') + ':' + String(left%60).padStart(2,'0'); };
+    const stop = () => { clearInterval(iv); iv=null; tm.classList.remove('running'); tog.textContent = left===total ? 'Start' : 'Resume'; };
+    tog.addEventListener('click', () => {
+      if (iv) return stop();
+      if (left<=0) left=total;
+      tm.classList.remove('done'); tm.classList.add('running'); tog.textContent = 'Pause';
+      iv = setInterval(() => { left--; show(); if (left<=0){ stop(); tm.classList.add('done'); tog.textContent='Restart'; t.textContent="Time's up"; } }, 1000);
+    });
+    rst.addEventListener('click', () => { stop(); left = total; tm.classList.remove('done'); tog.textContent='Start'; show(); });
+    show();
+  });
+
+  /* ================= QUIZ ================= */
+  const quiz = [
+    ['Which of these is part of a brand but NOT visible to customers at first glance?', ['Logo','Colour palette','Brand values','Tagline'], 2, 'Values sit below the waterline. Customers feel them through experience, not by looking.'],
+    ['“Delivered the same day” is a feature. Which line turns it into a benefit?', ['We have a delivery team','Delivery available in Lahore','Forgot the birthday? Still be the hero tonight.','Delivery charges Rs 200'], 2, 'A benefit says what the customer gets, not what the product has.'],
+    ['What does the P in the PAS formula stand for?', ['Product','Problem','Promise','Price'], 1, 'Problem, Agitate, Solution. Start with the pain your customer feels.'],
+    ['In a topic cluster, what do cluster posts link back to?', ['The homepage only','A competitor','The pillar page','Social media profiles'], 2, 'Every cluster post links to the pillar page, and the pillar links back to each post.'],
+    ['In a balanced content calendar, roughly how many posts should be promotional?', ['All of them','About 1 in 4','Exactly half','None'], 1, 'Help first, sell second. Too many sales posts and people stop paying attention.'],
+    ['Why is an email list called an “owned” channel?', ['It is free forever','You control the list and reach the inbox directly','Google ranks emails','It has no unsubscribe option'], 1, 'Social platforms decide who sees your posts. Your email list is yours to keep and use.'],
+    ['1,000 delivered, 30 clicked. What is the click rate?', ['0.3%','3%','30%','33%'], 1, '30 ÷ 1,000 = 0.03 = 3%. Clicks are a more reliable signal than opens.']
+  ];
+  let qi2=0, qscore=0;
+  const qbox = $('#quiz');
+  function renderQ(){
+    if (qi2>=quiz.length){
+      const pct = Math.round(qscore/quiz.length*100);
+      qbox.innerHTML = `<span class="qn">RESULT</span><div class="qt">${qscore} of ${quiz.length} correct (${pct}%)</div><p class="expl">${pct>=85?'Excellent. You are ready for the module project.':pct>=60?'Good work. Revisit the slides for the questions you missed.':'Review the four lectures, then try again.'}</p><div class="row"><button class="btn" id="qAgain">Try again</button></div>`;
+      $('#qAgain').addEventListener('click', () => { qi2=0; qscore=0; renderQ(); });
+      return;
+    }
+    const [q, opts] = quiz[qi2];
+    qbox.innerHTML = `<span class="qn">QUESTION ${qi2+1} OF ${quiz.length} · SCORE ${qscore}</span><div class="qt">${esc(q)}</div><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${esc(o)}</button>`).join('')}</div><p class="expl" id="qExpl"></p><div class="row" id="qNextRow" hidden><button class="btn" id="qNext">${qi2===quiz.length-1?'See result':'Next question'}</button></div>`;
+    $$('.opt', qbox).forEach(b => b.addEventListener('click', () => {
+      const [, , ans, ex] = quiz[qi2]; const pick = +b.dataset.i;
+      $$('.opt', qbox).forEach((x,i) => { x.disabled = true; if (i===ans) x.classList.add('right'); });
+      if (pick===ans) qscore++; else b.classList.add('wrong');
+      $('#qExpl').innerHTML = `<b>${pick===ans?'Correct.':'Not quite.'}</b> ${esc(ex)}`;
+      $('#qNextRow').hidden = false;
+      $('#qNext').addEventListener('click', () => { qi2++; renderQ(); });
+    }));
+  }
+  renderQ();
+})();
+</script>
+
+</body></html>
